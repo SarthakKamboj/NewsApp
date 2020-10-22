@@ -1,0 +1,33 @@
+@import "base/variables.scss";
+@import "base/mixins.scss";
+
+$newsSummariesTitleHeight: 150px;
+$newsSummariesSectionWidth: 400px;
+
+.container {
+    display: grid;
+    grid-template-rows: $newsSummariesTitleHeight 1fr;
+    width: $newsSummariesSectionWidth;
+
+    background: darken($black, 1%);
+    border-right: $darkBackgroundBorder;
+    grid-template-areas:
+        "title"
+        "content";
+    height: 100vh;
+    overflow-y: hidden;
+
+    * {
+        color: $green;
+    }
+
+    .title {
+        grid-area: title;
+        font-weight: 900;
+        display: flex;
+        font-size: 3rem;
+        align-items: center;
+        padding: 20px;
+        padding-left: 30px;
+    }
+}

@@ -1,0 +1,31 @@
+@import "base/variables.scss";
+
+$datesSectionWidth: 175px;
+$newsSummariesSectionWidth: 400px;
+$datesSectionHeight: 150px;
+
+.container {
+    display: grid;
+    grid-template-columns: $datesSectionWidth $newsSummariesSectionWidth 1fr;
+    grid-template-rows: $datesSectionHeight 1fr;
+    grid-template-areas:
+        "dates newsSummaries navBar"
+        "dates newsSummaries article";
+    .dates {
+        // border-right: $darkBackgroundBorder;
+        grid-area: dates;
+    }
+
+    .newsSummaries {
+        // border-right: $darkBackgroundBorder;
+        grid-area: newsSummaries;
+    }
+
+    .navBar {
+        grid-area: navBar;
+    }
+
+    .article {
+        grid-area: article;
+    }
+}

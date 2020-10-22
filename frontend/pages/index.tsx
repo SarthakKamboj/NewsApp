@@ -1,51 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import API_RESPONSE_TYPE from "../api/structure";
-import Link from "next/link";
-import NewsItem from "../components/NewsItem";
+import ArticleToShow from "../components/ArticleToShow";
+import Dates from "../components/Dates";
+import NavBar from "../components/NavBar";
+import NewsSummaries from "../components/NewsSummaries";
+import styles from "../styles/index.module.scss";
 
 type HomePageType = {};
 
 const HomePage: React.FC<HomePageType> = () => {
-    const [articles, setArticles] = useState<API_RESPONSE_TYPE[] | null>(null);
-    // const [a, setA] = useState([]);
+    const tempArticle: API_RESPONSE_TYPE = {
+        author: "sarthak",
+        content: "content",
+        description: "description",
+        publishedAt: "2020-05-07",
+        source: {
+            name: "name",
+            id: "id",
+        },
+        title: "title",
+        url: "https://www.google.com",
+        urlToImage:
+            "https://miro.medium.com/max/1042/1*9mESIE8IL4eEFZ6FIO4smA.png",
+    };
+    const [articleToShow, setArticleToShow] = useState<
+        API_RESPONSE_TYPE | undefined
+    >(tempArticle);
 
-    useEffect(() => {
-        const makeRequest = async () => {
-            const baseUrl = "http://newsapi.org/v2/top-headlines?";
-            const query = "country=us&";
-            const apiKey = `apiKey=${process.env.API_KEY}`;
-            const res = await fetch(baseUrl + query + apiKey);
-            const json = await res.json();
-            return json;
-        };
-
-        const extractArticles = ({ articles }) => {
-            const keys = Object.keys(articles);
-            // const apiResArticles: API_RESPONSE_TYPE[] = [];
-            const apiResArticles = keys.map((jsonKey) => {
-                const jsonObject = articles[jsonKey];
-                // return Object.entries(jsonObject);
-                // return (jsonObject as API_RESPONSE_TYPE).author;
-                return jsonObject as API_RESPONSE_TYPE;
-                // apiResArticles.push(jsonWithAPIType);
-            });
-            // console.log(...apiResArticles);
-
-            setArticles(apiResArticles);
-        };
-
-        makeRequest().then((json) => extractArticles(json));
-    }, []);
+    const memArticleToShow = useMemo(() => articleToShow, [articleToShow]);
 
     return (
-        <div>
-            {articles
-                ? articles.map((article) => {
-                      // return <div key={article.url}>{article.source}</div>;
-                      console.log(article);
-                      return <NewsItem newsObj={article} />;
-                  })
-                : "there are no articles"}
+        <div className={styles.container}>
+            <span className={styles.navBar}>
+                <NavBar />
+            </span>
+            <span className={styles.dates}>
+                <Dates />
+            </span>
+            <span className={styles.newsSummaries}>
+                <NewsSummaries setArticleToShow={setArticleToShow} />
+            </span>
+            <span className={styles.article}>
+                <ArticleToShow article={memArticleToShow} />
+            </span>
         </div>
     );
 };
