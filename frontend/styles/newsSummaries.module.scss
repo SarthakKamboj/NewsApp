@@ -10,9 +10,9 @@ $newsSummariesSectionWidth: 400px;
     width: $newsSummariesSectionWidth;
 
     background: darken($black, 1%);
-    border-right: $darkBackgroundBorder;
     grid-template-areas:
         "title"
+        "topics"
         "content";
     height: 100vh;
     overflow-y: hidden;
@@ -29,5 +29,51 @@ $newsSummariesSectionWidth: 400px;
         align-items: center;
         padding: 20px;
         padding-left: 30px;
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 35px;
+            left: 30px;
+            height: 0.2rem;
+            width: 2rem;
+            background: $green;
+        }
+    }
+
+    .topics {
+        grid-area: topics;
+        display: flex;
+        height: 3rem;
+        font-size: 1.2rem;
+        padding: 0 30px 0 30px;
+        justify-content: space-between;
+
+        li {
+            border: 2px solid $green;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 2px;
+            transition: all 0.2s;
+            cursor: pointer;
+
+            &:hover {
+                background: $green;
+                color: white;
+            }
+        }
+
+        .active {
+            background: $green;
+            color: white;
+        }
+    }
+
+    .articles {
+        background: $black;
+        @include flexCenter;
+        grid-area: content;
+        color: white;
     }
 }

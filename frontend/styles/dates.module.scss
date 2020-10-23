@@ -39,9 +39,27 @@ $dateSectionTitle: 150px;
             transition: all 0.5s;
             cursor: pointer;
             @include flexCenter;
+            position: relative;
+
+            &:after {
+                content: "";
+                transition: all 0.2s;
+                position: absolute;
+                top: 50%;
+                bottom: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                bottom: 25%;
+                background: $green;
+                height: 0;
+                width: 0.2rem;
+                opacity: 0.5;
+            }
 
             &:hover {
-                background: $lightBackgroundGreen;
+                &:after {
+                    height: 2rem;
+                }
             }
         }
     }

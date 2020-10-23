@@ -9,24 +9,11 @@ import styles from "../styles/index.module.scss";
 type HomePageType = {};
 
 const HomePage: React.FC<HomePageType> = () => {
-    const tempArticle: API_RESPONSE_TYPE = {
-        author: "sarthak",
-        content: "content",
-        description: "description",
-        publishedAt: "2020-05-07",
-        source: {
-            name: "name",
-            id: "id",
-        },
-        title: "title",
-        url: "https://www.google.com",
-        urlToImage:
-            "https://miro.medium.com/max/1042/1*9mESIE8IL4eEFZ6FIO4smA.png",
-    };
     const [articleToShow, setArticleToShow] = useState<
         API_RESPONSE_TYPE | undefined
-    >(tempArticle);
+    >(undefined);
 
+    const [date, setDate] = useState<Date | undefined>(undefined);
     const memArticleToShow = useMemo(() => articleToShow, [articleToShow]);
 
     return (
@@ -35,10 +22,13 @@ const HomePage: React.FC<HomePageType> = () => {
                 <NavBar />
             </span>
             <span className={styles.dates}>
-                <Dates />
+                <Dates setDate={setDate} />
             </span>
             <span className={styles.newsSummaries}>
-                <NewsSummaries setArticleToShow={setArticleToShow} />
+                <NewsSummaries
+                    date={date}
+                    setArticleToShow={setArticleToShow}
+                />
             </span>
             <span className={styles.article}>
                 <ArticleToShow article={memArticleToShow} />

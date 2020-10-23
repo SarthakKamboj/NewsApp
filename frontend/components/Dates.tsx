@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/dates.module.scss";
 
-type DatesType = {};
+type DatesType = {
+    setDate: React.Dispatch<React.SetStateAction<Date>>;
+};
 
-const Dates: React.FC<DatesType> = () => {
-    // const days = [
-    //     "Monday",
-    //     "Tuesday",
-    //     "Wednesday",
-    //     "Thursday",
-    //     "Friday",
-    //     "Saturday",
-    //     "Sunday",
-    // ];
-
+const Dates: React.FC<DatesType> = ({ setDate }) => {
     const numDaysBack = 7;
     const [days, setDays] = useState<Date[]>([]);
 
@@ -24,7 +16,7 @@ const Dates: React.FC<DatesType> = () => {
             date.setDate(date.getDate() - 1);
             daysArr.push(new Date(date.getTime()));
         }
-        console.log(daysArr);
+        // console.log(daysArr);
         setDays(daysArr);
     }, []);
 
@@ -36,7 +28,7 @@ const Dates: React.FC<DatesType> = () => {
             <div className={styles.dates}>
                 {days.map((day, index) => {
                     const onClickDate = () => {
-                        alert(day);
+                        setDate(day);
                     };
                     return (
                         <p
@@ -45,7 +37,6 @@ const Dates: React.FC<DatesType> = () => {
                             className={styles.day}
                         >
                             {day.toDateString()}
-                            {/* {day.toLocaleString()} */}
                         </p>
                     );
                 })}
