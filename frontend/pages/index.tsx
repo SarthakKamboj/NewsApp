@@ -13,13 +13,14 @@ const HomePage: React.FC<HomePageType> = () => {
         API_RESPONSE_TYPE | undefined
     >(undefined);
 
+    const [query, setQuery] = useState<string>("");
     const [date, setDate] = useState<Date | undefined>(undefined);
     const memArticleToShow = useMemo(() => articleToShow, [articleToShow]);
 
     return (
         <div className={styles.container}>
             <span className={styles.navBar}>
-                <NavBar />
+                <NavBar setQuery={setQuery} />
             </span>
             <span className={styles.dates}>
                 <Dates setDate={setDate} />
@@ -28,6 +29,8 @@ const HomePage: React.FC<HomePageType> = () => {
                 <NewsSummaries
                     date={date}
                     setArticleToShow={setArticleToShow}
+                    query={query}
+                    setQuery={setQuery}
                 />
             </span>
             <span className={styles.article}>

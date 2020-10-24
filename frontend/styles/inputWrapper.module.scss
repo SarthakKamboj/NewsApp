@@ -1,0 +1,43 @@
+@import "base/mixins.scss";
+@import "base/variables.scss";
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .inputContainer {
+        background: white;
+        font-size: 2rem;
+        padding: 1rem;
+        border-radius: 2rem;
+        display: flex;
+        justify-content: space-between;
+        transition: all 0.2s;
+
+        .input {
+            transition: all 0.2s;
+            outline: none;
+            border: none;
+            width: 20rem;
+        }
+
+        // $input-active-width: 20rem;
+        // .inputActive {
+        //     width: $input-active-width;
+        // }
+
+        .search {
+            color: $black;
+            cursor: pointer;
+        }
+
+        // &:hover {
+        //     .input {
+        //         width: $input-active-width;
+        //     }
+        // }
+    }
+    .clear {
+        padding: 0.5rem 1.5rem;
+        cursor: pointer;
+    }
+}

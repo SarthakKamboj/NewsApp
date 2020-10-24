@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import styles from "../styles/dates.module.scss";
 
@@ -13,19 +14,21 @@ const Dates: React.FC<DatesType> = ({ setDate }) => {
         const date = new Date();
         const daysArr: Date[] = [];
         for (let i = 0; i < numDaysBack; i++) {
-            date.setDate(date.getDate() - 1);
             daysArr.push(new Date(date.getTime()));
+            date.setDate(date.getDate() - 1);
         }
-        // console.log(daysArr);
         setDays(daysArr);
     }, []);
 
     return (
         <section className={styles.container}>
             <div className={styles.logo}>
-                <img src={"logo.png"} alt="Logo" />
+                <FontAwesomeIcon
+                    icon={"newspaper"}
+                    className={styles.logoIcon}
+                />
             </div>
-            <div className={styles.dates}>
+            {/* <div className={styles.dates}>
                 {days.map((day, index) => {
                     const onClickDate = () => {
                         setDate(day);
@@ -40,7 +43,7 @@ const Dates: React.FC<DatesType> = ({ setDate }) => {
                         </p>
                     );
                 })}
-            </div>
+            </div> */}
         </section>
     );
 };

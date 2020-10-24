@@ -5,19 +5,19 @@ import styles from "../styles/newsSummary.module.scss";
 
 type NewsSummaryType = {
     article: API_RESPONSE_TYPE;
-    index?: number;
     onClick: () => void;
+    height: number;
 };
 
 const NewsSummary: React.FC<NewsSummaryType> = React.memo(
     ({
+        height,
         article: {
             author,
             title,
             publishedAt,
             source: { name },
         },
-        index,
         onClick,
     }) => {
         const [date, setDate] = useState<string>();
@@ -27,10 +27,10 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
 
         return (
             <div
+                style={{ height: `${height}rem` }}
                 onClick={onClick}
                 className={classnames({
                     [styles.container]: true,
-                    [styles.lighterBackground]: index < 2,
                 })}
             >
                 <p className={styles.name}>{name}</p>

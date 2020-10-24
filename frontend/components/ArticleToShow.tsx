@@ -9,7 +9,6 @@ type ArticleToShowType = {
 
 const ArticleToShow: React.FC<ArticleToShowType> = React.memo(({ article }) => {
     const [body, setBody] = useState<JSX.Element>();
-    const [date, setDate] = useState<string | null>(null);
     useEffect(() => {
         const createArticleBody = (article: API_RESPONSE_TYPE) => {
             const {
@@ -21,7 +20,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(({ article }) => {
                 url,
                 urlToImage,
             } = article;
-            setDate(publishedAt.split("T")[0]);
             return (
                 <div className={styles.container}>
                     <div className={styles.thumbnail}>
@@ -37,9 +35,8 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(({ article }) => {
                         </p>
                         <p className={styles.date}>
                             <span className={styles.preText}>DATE </span>
-                            {date}
+                            {publishedAt.split("T")[0]}
                         </p>
-                        {/* <p className={styles.content}>{content}</p> */}
                         <p className={styles.description}>
                             {description || description !== "" ? (
                                 <>

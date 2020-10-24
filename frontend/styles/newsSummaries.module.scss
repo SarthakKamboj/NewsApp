@@ -2,18 +2,21 @@
 @import "base/mixins.scss";
 
 $newsSummariesTitleHeight: 150px;
+$newsSummariesTopicsHeight: 5rem;
+$newsPaginationHeight: 80px;
 $newsSummariesSectionWidth: 400px;
 
 .container {
     display: grid;
-    grid-template-rows: $newsSummariesTitleHeight 1fr;
+    grid-template-rows: $newsSummariesTitleHeight $newsSummariesTopicsHeight 1fr $newsPaginationHeight;
     width: $newsSummariesSectionWidth;
 
-    background: darken($black, 1%);
+    background: $black;
     grid-template-areas:
         "title"
         "topics"
-        "content";
+        "articles"
+        "paginationSection";
     height: 100vh;
     overflow-y: hidden;
 
@@ -45,7 +48,7 @@ $newsSummariesSectionWidth: 400px;
     .topics {
         grid-area: topics;
         display: flex;
-        height: 3rem;
+        // height: 5rem;
         font-size: 1.2rem;
         padding: 0 30px 0 30px;
         justify-content: space-between;
@@ -55,25 +58,63 @@ $newsSummariesSectionWidth: 400px;
             border-radius: 5px;
             padding: 5px 10px;
             margin: 0 2px;
+
+            margin-bottom: 2rem;
             transition: all 0.2s;
             cursor: pointer;
 
             &:hover {
                 background: $green;
+                border: 2px solid $green;
                 color: white;
             }
         }
 
         .active {
             background: $green;
+            border: 2px solid $green;
             color: white;
         }
     }
 
     .articles {
         background: $black;
-        @include flexCenter;
-        grid-area: content;
+        display: flex;
+        align-items: flex-start;
+        grid-area: articles;
+        height: 100%;
         color: white;
+        flex-direction: column;
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid $green;
+            border-radius: 50%;
+            $loader-width: 80px;
+            width: $loader-width;
+            height: $loader-width;
+            animation: spin 2s linear infinite;
+            align-self: center;
+            top: 50%;
+            bottom: 50%;
+            // transform: translateY(50%);
+            // border-width: 100px 0 100px 100px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
+
+    .paginationSection {
+        grid-area: paginationSection;
+        color: white;
+        height: 100%;
+        width: 100%;
     }
 }

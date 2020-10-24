@@ -1,48 +1,35 @@
-import React, { useMemo } from "react";
+import React from "react";
 import classnames from "classnames";
 import { useEffect, useState } from "react";
 import API_RESPONSE_TYPE from "../api/structure";
 import styles from "../styles/newsSummaries.module.scss";
 import NewsSummary from "./NewsSummary";
+import Pagination from "./Pagination";
 
 type NewsSummariesType = {
     setArticleToShow: React.Dispatch<React.SetStateAction<API_RESPONSE_TYPE>>;
     date?: Date | undefined;
+    query: string;
+    setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-type topicsType = "sports" | "entertainment" | "all" | "technology";
+type topicsType = "sports" | "entertainment" | /*"all" |*/ "technology";
 
 const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
-    ({ setArticleToShow, date }) => {
+    ({ setArticleToShow, date, query }) => {
         const [articles, setArticles] = useState<API_RESPONSE_TYPE[] | null>(
             []
         );
-        // const [allArticles, setAllArticles] = useState<
-        //     API_RESPONSE_TYPE[] | null
-        // >(null);
-        // const [entertainmentArticles, setEntertainmentArticles] = useState<
-        //     API_RESPONSE_TYPE[] | null
-        // >(null);
-        // const [techArticles, setTechArticles] = useState<
-        //     API_RESPONSE_TYPE[] | null
-        // >(null);
-        // const [sportsArticles, setSportsArticles] = useState<
-        //     API_RESPONSE_TYPE[] | null
-        // >(null);
-        const [topic, setTopic] = useState<topicsType>("all");
+        const [loading, setLoading] = useState<boolean>(true);
+        const [allArticles, setAllArticles] = useState<
+            API_RESPONSE_TYPE[] | null
+        >([]);
 
-        // const mapTopicStrToVar = () => {
-        //     switch (topic) {
-        //         case "entertainment":
-        //             return entertainmentArticles;
-        //         case "sports":
-        //             return sportsArticles;
-        //         case "technology":
-        //             return techArticles;
-        //         case "all":
-        //             return allArticles;
-        //     }
-        // };
+        const newsSummaryHeight = 13.25;
+        const minArticlesToShow = 3;
+        const [paginationGroup, setPaginationGroup] = useState<number>(0);
+        const [groupsOfArticles, setGroupsOfArticles] = useState<number>(0);
+        const [topic, setTopic] = useState<topicsType>("sports");
 
         const convertDateToString = (d: Date) => {
             return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
@@ -50,78 +37,65 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
 
         useEffect(() => {
             const requestAndUpdate = async () => {
-                const makeRequest = async () => {
+                const makeRequest = async (): Promise<any> => {
                     let baseUrl;
-                    let query;
-
+                    let queryUrl;
                     let dateString;
+                    const queryParams = query !== "" ? `&q=${query}` : "";
+
                     if (!date) {
                         dateString = convertDateToString(new Date());
                     } else {
                         dateString = convertDateToString(date);
                     }
-                    if (topic === "all") {
-                        baseUrl = "http://newsapi.org/v2/top-headlines?";
-                        query = `country=us&from=${dateString}&to=${dateString}&`;
-                    } else {
-                        baseUrl = "http://newsapi.org/v2/everything?";
-                        query = `q=${topic}&from=${dateString}&to=${dateString}&`;
-                    }
+                    baseUrl = "http://newsapi.org/v2/top-headlines?";
+                    queryUrl = `category=${topic}${queryParams}&from=${dateString}&to=${dateString}&`;
                     const apiKey = `apiKey=${process.env.API_KEY}`;
-                    const requestUrl = baseUrl + query + apiKey;
-                    alert(requestUrl);
+
+                    const requestUrl = baseUrl + queryUrl + apiKey;
                     const res = await fetch(requestUrl);
                     return await res.json();
                 };
-
-                // const updateTopicArticles = (
-                //     apiResArticles: API_RESPONSE_TYPE[]
-                // ) => {
-                //     switch (topic) {
-                //         case "entertainment":
-                //             setEntertainmentArticles(apiResArticles);
-                //             break;
-                //         case "sports":
-                //             setSportsArticles(apiResArticles);
-                //             break;
-                //         case "technology":
-                //             setTechArticles(apiResArticles);
-                //             break;
-                //         case "all":
-                //             setAllArticles(apiResArticles);
-                //             break;
-                //     }
-                // };
                 const extractArticles = ({ articles }) => {
                     const apiResArticles: API_RESPONSE_TYPE[] = articles.map(
                         (article) => {
                             return article as API_RESPONSE_TYPE;
                         }
                     );
-
-                    // updateTopicArticles(apiResArticles);
+                    setGroupsOfArticles(
+                        Math.ceil(apiResArticles.length / minArticlesToShow)
+                    );
                     return apiResArticles;
                 };
 
-                let articlesToRender;
-                // if (mapTopicStrToVar() === null) {
                 const json = await makeRequest();
-                articlesToRender = extractArticles(json);
-                // } else {
-                //     articlesToRender = mapTopicStrToVar();
-                // }
+                const articlesToRender = extractArticles(json);
+                setAllArticles(articlesToRender);
+                setPaginationGroup(0);
 
-                setArticles(articlesToRender);
+                setLoading(false);
             };
-            // requestAndUpdate();
-        }, [date, topic]);
+            setLoading(true);
+            setAllArticles([]);
+            requestAndUpdate();
+        }, [date, topic, query]);
+
+        useEffect(() => {
+            const paginateAllArticles = async () => {
+                if (allArticles) {
+                    setArticles(
+                        allArticles.slice(
+                            paginationGroup * minArticlesToShow,
+                            (paginationGroup + 1) * minArticlesToShow
+                        )
+                    );
+                }
+            };
+            paginateAllArticles();
+        }, [paginationGroup, allArticles]);
 
         const changeTopic = (t: topicsType) => {
-            if (topic === t) {
-                setTopic("all");
-            } else {
-                setTopic(t);
-            }
+            setTopic(t);
         };
 
         return (
@@ -154,22 +128,29 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     </li>
                 </ul>
                 <div className={styles.articles}>
+                    <div className={classnames({ [styles.loader]: loading })} />
                     {articles !== []
-                        ? articles.map((article) => {
-                              console.log(article.publishedAt);
+                        ? articles.map((article, index) => {
+                              console.log(article);
                               return (
                                   <NewsSummary
+                                      height={newsSummaryHeight}
                                       onClick={() => {
                                           setArticleToShow(article);
                                       }}
-                                      //   key={index}
-                                      key={article.url}
-                                      //   index={index}
+                                      key={index}
                                       article={article}
                                   />
                               );
                           })
                         : "no articles"}
+                </div>
+                <div className={styles.paginationSection}>
+                    <Pagination
+                        setPaginationGroup={setPaginationGroup}
+                        paginationNumber={paginationGroup}
+                        groups={groupsOfArticles}
+                    />
                 </div>
             </div>
         );

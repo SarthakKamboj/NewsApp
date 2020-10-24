@@ -18,6 +18,8 @@ $dateSectionTitle: 150px;
         grid-area: logo;
         @include flexCenter;
 
+        color: $green;
+        font-size: 5rem;
         img {
             width: 80px;
         }
