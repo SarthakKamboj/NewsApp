@@ -52,7 +52,7 @@ $newsSummariesSectionWidth: 400px;
         grid-area: topics;
         @include flexCenter;
         column-gap: 2rem;
-        $li-active-color: $white;
+        $li-active-color: $black;
 
         li {
             border: 2px solid $primary;
@@ -89,6 +89,8 @@ $newsSummariesSectionWidth: 400px;
         color: $white;
         flex-direction: column;
         row-gap: 0.5rem;
+        position: relative;
+        overflow-y: hidden;
 
         .loader {
             border: 16px solid $white;

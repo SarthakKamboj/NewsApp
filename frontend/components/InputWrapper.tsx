@@ -31,11 +31,10 @@ const InputWrapper: React.FC<InputWrapperType> = ({ setQuery }) => {
                         [styles.inputActive]: inputVal?.length > 0,
                     })}
                 />
-                <FontAwesomeIcon
-                    onClick={searchOnClick}
-                    icon={"search"}
-                    className={styles.search}
-                />
+
+                <div className={styles.search}>
+                    <FontAwesomeIcon onClick={searchOnClick} icon={"search"} />
+                </div>
             </div>
             <h4 className={styles.clear} onClick={clearClick}>
                 Clear Search

@@ -133,9 +133,12 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     <div className={classnames({ [styles.loader]: loading })} />
                     {articles !== []
                         ? articles.map((article, index) => {
-                              console.log(article);
                               return (
                                   <NewsSummary
+                                      lastArticleOnPagination={
+                                          //   (index + 1) % 3 !== 0
+                                          false
+                                      }
                                       height={newsSummaryHeight}
                                       onClick={() => {
                                           setArticleToShow(article);
