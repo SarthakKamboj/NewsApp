@@ -1,77 +1,111 @@
 import React, { useEffect, useState } from "react";
-import API_RESPONSE_TYPE from "../api/structure";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    ARTICLE_RESPONSE_TYPE,
+    SOURCES_RESPONSE_TYPE,
+} from "../api/reponseTypes";
 import styles from "../styles/articleToShow.module.scss";
 import Link from "next/link";
 
 type ArticleToShowType = {
-    article?: API_RESPONSE_TYPE;
+    article?: ARTICLE_RESPONSE_TYPE;
+    sourcesInfo?: SOURCES_RESPONSE_TYPE[];
 };
 
-const ArticleToShow: React.FC<ArticleToShowType> = React.memo(({ article }) => {
-    const [body, setBody] = useState<JSX.Element>();
-    useEffect(() => {
-        const createArticleBody = (article: API_RESPONSE_TYPE) => {
-            const {
-                author,
-                description,
-                publishedAt,
-                source: { name },
-                title,
-                url,
-                urlToImage,
-            } = article;
-            return (
-                <div className={styles.container}>
-                    <div className={styles.thumbnail}>
-                        <img src={urlToImage} alt="Thumbnail" />
+const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
+    ({ article, sourcesInfo }) => {
+        const [body, setBody] = useState<JSX.Element>();
+
+        useEffect(() => {
+            const createArticleBody = (article: ARTICLE_RESPONSE_TYPE) => {
+                const {
+                    author,
+                    description,
+                    publishedAt,
+                    source: { name },
+                    title,
+                    content,
+                    url,
+                    urlToImage,
+                } = article;
+                const titleMaxCharacters = 30;
+
+                const titleArr = title.split("");
+                const checkIfValidImgPic = (img) => {
+                    return img !== null && img !== "";
+                };
+                return (
+                    <div className={styles.container}>
+                        <div className={styles.thumbnail}>
+                            <img
+                                src={
+                                    checkIfValidImgPic(urlToImage)
+                                        ? urlToImage
+                                        : "defaultArticleImg.jpg"
+                                }
+                                alt="Thumbnail"
+                            />
+                        </div>
+                        <div className={styles.content}>
+                            <p className={styles.name}>{name}</p>
+                            <h1 className={styles.waterMarkName}>{name}</h1>
+                            <p className={styles.title}>
+                                <div className={styles.decBar} />
+                                {`${titleArr
+                                    .slice(0, titleMaxCharacters)
+                                    .join("")}${
+                                    titleArr.length > titleMaxCharacters
+                                        ? "..."
+                                        : ""
+                                }`}
+                            </p>
+                            <p className={styles.author}>{author}</p>
+                            <p className={styles.date}>
+                                {publishedAt.split("T")[0]}
+                            </p>
+                            <p className={styles.description}>
+                                {description !== null && description !== "" ? (
+                                    <> {description} </>
+                                ) : content !== null && content !== "" ? (
+                                    <>{content}</>
+                                ) : (
+                                    <>
+                                        {
+                                            sourcesInfo?.find((s) => {
+                                                return s.name === name;
+                                            }).description
+                                        }
+                                    </>
+                                )}
+                            </p>
+                            <div className={styles.link}>
+                                <Link href={url}>
+                                    <a target="_blank">
+                                        <span>Read Article</span>
+                                        <FontAwesomeIcon icon="external-link-alt" />
+                                        {/* &rarr; */}
+                                    </a>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-                    <div className={styles.content}>
-                        <p className={styles.name}>{name}</p>
+                );
+            };
 
-                        <p className={styles.title}>{title}</p>
-                        <p className={styles.author}>
-                            <span className={styles.preText}>AUTHOR </span>
-                            {author}
-                        </p>
-                        <p className={styles.date}>
-                            <span className={styles.preText}>DATE </span>
-                            {publishedAt.split("T")[0]}
-                        </p>
-                        <p className={styles.description}>
-                            {description || description !== "" ? (
-                                <>
-                                    <span className={styles.preText}>
-                                        DESCRIPTION{" "}
-                                    </span>
-                                    {description}
-                                </>
-                            ) : (
-                                ""
-                            )}
-                        </p>
-                        <Link href={url}>
-                            <a className={styles.link} target="_blank">
-                                Read Article &rarr;
-                            </a>
-                        </Link>
+            if (article) {
+                setBody(createArticleBody(article));
+            } else {
+                const body = (
+                    <div className={styles.noArticleSelected}>
+                        Please Select An Article
                     </div>
-                </div>
-            );
-        };
+                );
+                setBody(body);
+            }
+        }, [article]);
 
-        if (article) {
-            setBody(createArticleBody(article));
-        } else {
-            const body = (
-                <div className={styles.noArticleSelected}>
-                    Please Select An Article
-                </div>
-            );
-            setBody(body);
-        }
-    }, [article]);
-
-    return <>{body}</>;
-});
+        return <>{body}</>;
+    }
+);
 
 export default ArticleToShow;

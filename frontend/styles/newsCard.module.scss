@@ -10,14 +10,14 @@
     display: flex;
     align-items: flex-end;
     background-size: cover;
-    background-color: rgba($color: #000000, $alpha: 1);
+    // background-color: rgba($color: #000000, $alpha: 1);
     position: relative;
     -webkit-box-shadow: inset -5px -52px 26px -9px rgba(0, 0, 0, 0.29);
     -moz-box-shadow: inset -5px -52px 26px -9px rgba(0, 0, 0, 0.29);
     box-shadow: inset -5px -52px 26px -9px rgba(0, 0, 0, 0.29);
 
     * {
-        color: white;
+        color: $white;
         font-weight: bold;
     }
 
@@ -32,7 +32,7 @@
         height: 100%;
         position: absolute;
         pointer-events: none;
-        background-color: lighten(grey, 10);
+        background-color: lighten($grey, 10);
         top: 0;
         left: 0;
         opacity: 0.2;

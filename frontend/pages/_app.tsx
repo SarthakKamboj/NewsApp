@@ -7,9 +7,18 @@ import {
     faCheckSquare,
     faSearch,
     faNewspaper,
+    faCaretRight,
+    faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(fab, faNewspaper, faSearch, faCheckSquare);
+library.add(
+    fab,
+    faExternalLinkAlt,
+    faCaretRight,
+    faNewspaper,
+    faSearch,
+    faCheckSquare
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
     return <Component {...pageProps} />;

@@ -10,21 +10,43 @@
 
     li {
         @include flexCenter;
-        border-radius: 10px;
-        width: 2.5rem;
+        // border: 2px solid $primary;
+        width: 3rem;
         height: 3rem;
-        border: 2px solid $green;
         margin: 0 0.5rem;
         transition: 0.2s all;
         cursor: pointer;
+        position: relative;
+
+        &:after {
+            // content: "sdkn";
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            right: 50%;
+            transform: translateX(-50%);
+            background: $primary;
+            width: 0;
+            height: 0.25rem;
+            transition: $transition;
+        }
 
         &:hover {
-            background: $green;
-            color: white;
+            // background: $primary;
+            // color: $white;
+
+            &:after {
+                width: 1rem;
+            }
         }
     }
     .selectedPaginationGroup {
-        background: $green;
-        color: white;
+        // background: $primary;
+        // color: $white;
+
+        &:after {
+            width: 1rem;
+        }
     }
 }

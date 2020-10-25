@@ -1,8 +1,21 @@
-$grey: #f4f4f4;
+// colors
+$grey: #a7a7a7;
 $lightGrey: #0f111ece;
 $black: #0f111e;
+$primary: rgb(0, 126, 105);
+$darken-percentage: 5%;
+$white: white;
+$white-opaque: rgba(255, 255, 255, 0.2);
+$primary-opaque: rgba(0, 126, 105, 0.5);
+
+// background colros
 $darkBackgroundBorder: 2px solid $lightGrey;
-$green: rgb(0, 126, 105);
-$green-opaque: rgba(0, 126, 105, 0.5);
-$lightBackgroundGreen: #d3f3dccb;
-$lighterBackgroundGreen: #d3f3dc91;
+$lightBackgroundPrimary: #d3f3dccb;
+$lighterBackgroundPrimary: #d3f3dc91;
+
+// transition
+$transition-time: 0.2s;
+$transition: all $transition-time;
+
+// watermark text border
+$textBorder: 1px $white-opaque;

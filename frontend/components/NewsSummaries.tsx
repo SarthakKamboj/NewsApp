@@ -1,13 +1,15 @@
 import React from "react";
 import classnames from "classnames";
 import { useEffect, useState } from "react";
-import API_RESPONSE_TYPE from "../api/structure";
+import { ARTICLE_RESPONSE_TYPE } from "../api/reponseTypes";
 import styles from "../styles/newsSummaries.module.scss";
 import NewsSummary from "./NewsSummary";
 import Pagination from "./Pagination";
 
 type NewsSummariesType = {
-    setArticleToShow: React.Dispatch<React.SetStateAction<API_RESPONSE_TYPE>>;
+    setArticleToShow: React.Dispatch<
+        React.SetStateAction<ARTICLE_RESPONSE_TYPE>
+    >;
     date?: Date | undefined;
     query: string;
     setQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -17,12 +19,12 @@ type topicsType = "sports" | "entertainment" | /*"all" |*/ "technology";
 
 const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
     ({ setArticleToShow, date, query }) => {
-        const [articles, setArticles] = useState<API_RESPONSE_TYPE[] | null>(
-            []
-        );
+        const [articles, setArticles] = useState<
+            ARTICLE_RESPONSE_TYPE[] | null
+        >([]);
         const [loading, setLoading] = useState<boolean>(true);
         const [allArticles, setAllArticles] = useState<
-            API_RESPONSE_TYPE[] | null
+            ARTICLE_RESPONSE_TYPE[] | null
         >([]);
 
         const newsSummaryHeight = 13.25;
@@ -49,7 +51,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                         dateString = convertDateToString(date);
                     }
                     baseUrl = "http://newsapi.org/v2/top-headlines?";
-                    queryUrl = `category=${topic}${queryParams}&from=${dateString}&to=${dateString}&`;
+                    queryUrl = `category=${topic}&country=us${queryParams}&from=${dateString}&to=${dateString}&`;
                     const apiKey = `apiKey=${process.env.API_KEY}`;
 
                     const requestUrl = baseUrl + queryUrl + apiKey;
@@ -57,9 +59,9 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     return await res.json();
                 };
                 const extractArticles = ({ articles }) => {
-                    const apiResArticles: API_RESPONSE_TYPE[] = articles.map(
+                    const apiResArticles: ARTICLE_RESPONSE_TYPE[] = articles.map(
                         (article) => {
-                            return article as API_RESPONSE_TYPE;
+                            return article as ARTICLE_RESPONSE_TYPE;
                         }
                     );
                     setGroupsOfArticles(
@@ -100,7 +102,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
 
         return (
             <div className={styles.container}>
-                <h1 className={styles.title}>Recent News</h1>
+                {/* <h1 className={styles.title}>Recent News</h1> */}
                 <ul className={styles.topics}>
                     <li
                         onClick={() => changeTopic("sports")}

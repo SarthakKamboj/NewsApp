@@ -6,18 +6,18 @@ $datesSectionHeight: 150px;
 
 .container {
     display: grid;
+    width: 100vw;
+    height: 100vh;
     grid-template-columns: $datesSectionWidth $newsSummariesSectionWidth 1fr;
     grid-template-rows: $datesSectionHeight 1fr;
     grid-template-areas:
-        "dates newsSummaries navBar"
-        "dates newsSummaries article";
-    .dates {
-        // border-right: $darkBackgroundBorder;
-        grid-area: dates;
+        "logo navBar navBar"
+        "newsSummaries newsSummaries article";
+    .logo {
+        grid-area: logo;
     }
 
     .newsSummaries {
-        // border-right: $darkBackgroundBorder;
         grid-area: newsSummaries;
     }
 

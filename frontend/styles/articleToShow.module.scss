@@ -4,84 +4,169 @@
 .container {
     background: $black;
     width: 100%;
-    color: white;
+    height: 100%;
+    color: $white;
     height: calc(100vh - 150px);
-    display: grid;
     position: relative;
     overflow-y: hidden;
-    // $small-row-height: 50px;
-    // $big-row-height: 100px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: "thumbnail content";
 
     .thumbnail {
+        pointer-events: none;
         overflow-y: hidden;
-        border-radius: 10px;
-        grid-area: thumbnail;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 95%;
         width: 100%;
-        height: 100%;
-        @include flexCenter;
 
         img {
-            width: 85%;
-            border-radius: 10px;
+            height: 100%;
+            opacity: 0.2;
+            filter: grayscale(100%) blur(2px);
         }
     }
+
+    .waterMarkName {
+        -webkit-text-stroke: $textBorder;
+        color: rgba(1, 1, 1, 0);
+        position: absolute;
+        transform: translateY(-50%);
+        font-size: 20rem;
+        top: 40%;
+        left: 0;
+        pointer-events: none;
+    }
+
     .content {
         text-align: left;
         box-sizing: content-box;
         margin: 2px 0;
-        grid-area: content;
-        // @include flexCenter;
-        display: flex;
-        justify-content: center;
-        width: 90%;
-        flex-direction: column;
+        display: grid;
+        $name-row-height: 3rem;
+        $author-row-height: 1.25rem;
+        $title-row-height: 17rem;
+        $desc-row-height: 7rem;
+        $date-row-height: 2rem;
+        $link-row-height: 4rem;
+        grid-template-rows: $name-row-height 1fr $author-row-height $title-row-height $desc-row-height $date-row-height $link-row-height 1fr;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas:
+            ". . name . ."
+            ". . name . ."
+            ". author author . ."
+            ". title title . ."
+            ". description description . ."
+            ". date . . ."
+            ". link . . ."
+            ". . . . .";
+        row-gap: 0.5rem;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        * {
+            z-index: 2;
+        }
+        position: relative;
 
         .preText {
             font-size: 0.7rem;
-            color: white;
+            color: $white;
             max-width: 4.5rem;
         }
 
         .name {
-            color: grey;
+            color: $white;
             grid-area: name;
             width: 100%;
-        }
-
-        .title {
-            color: $green;
+            text-align: center;
+            @include flexCenter;
             font-weight: bold;
             font-size: 2rem;
+            // background: green;
+        }
+        .title {
+            color: $white;
+            font-weight: bold;
+            font-size: 4rem;
             grid-area: title;
+            font-weight: 700;
+            position: relative;
+            @include flexCenter;
+
+            .decBar {
+                position: absolute;
+                border-radius: 10px;
+                top: 0;
+                left: 0;
+                width: 4rem;
+                height: 0.5rem;
+                background: white;
+            }
         }
 
         .author {
-            font-size: 1.5rem;
+            font-size: 1rem;
             grid-area: author;
+            display: flex;
+            align-items: center;
         }
 
         .date {
             font-size: 1.2rem;
             grid-area: date;
+            display: flex;
         }
 
         .description {
             font-size: 1.15rem;
+            line-height: 150%;
             grid-area: description;
         }
 
         .link {
             text-decoration: none;
             grid-area: link;
-            color: $green;
             transition: all 0.2s;
             font-size: 1.5rem;
             transform-origin: 0 0;
+            display: flex;
 
-            &:hover {
-                transform: scale(1.2);
+            a {
+                color: $white;
+                height: 2.8rem;
+                width: 15rem;
+                @include flexCenter;
+                transition: $transition;
+                text-decoration: none;
+                background: $primary;
+                border-radius: 5px;
+                display: grid;
+                grid-template-columns: 20% 80%;
+                grid-template-areas: "icon text";
+
+                span {
+                    grid-area: text;
+                    width: 100%;
+                    height: 100%;
+                    @include flexCenter;
+                }
+
+                :nth-child(2) {
+                    width: 100%;
+                    height: 100%;
+                    grid-area: icon;
+                    transition: $transition;
+                    background-color: darken($primary, $darken-percentage);
+
+                    * {
+                        transform: scale(0.5);
+                        transform-origin: 50% 50%;
+                    }
+                }
+
+                &:hover {
+                    background-color: darken($primary, $darken-percentage);
+                }
             }
         }
     }
@@ -90,7 +175,7 @@
     @include flexCenter;
     background: $black;
     width: 100%;
-    color: white;
+    color: $white;
     font-size: 3rem;
     height: calc(100vh - 150px);
 }

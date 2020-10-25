@@ -1,34 +1,73 @@
 @import "base/variables.scss";
+@import "base/mixins.scss";
 
 $borderLightness: 30%;
 
 .container {
-    width: 100%;
-    display: block;
-    padding-left: 30px;
-
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-areas: "text readMoreBtn";
+    background: darken($black, 2%);
+    border-radius: 1rem;
     cursor: pointer;
 
-    * {
-        color: grey;
-    }
+    .text {
+        grid-area: text;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 2rem;
+        row-gap: 5px;
 
-    .title {
-        font-weight: bold;
-        font-size: 1.1rem;
-        color: $green;
-    }
+        overflow-y: hidden;
 
-    .readMore {
-        color: $green;
-        transition: all 0.2s;
-        height: 1.6rem;
-        transform-origin: 0 0;
+        .name,
+        .author,
+        .date {
+            color: $grey;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: $primary;
+            overflow-y: hidden;
+        }
+
+        .name {
+            font-size: 0.85rem;
+        }
+
+        .readMore {
+            color: $primary;
+            transition: all 0.2s;
+            height: 1.6rem;
+            transform-origin: 0 0;
+        }
+    }
+    .readMoreBtn {
+        grid-area: readMoreBtn;
+        font-size: 4rem;
+        @include flexCenter;
+        height: 100%;
+        width: 100%;
+        transition: $transition;
     }
 
     &:hover {
-        .readMore {
-            transform: scale(1.2);
+        .text {
+            .readMore {
+                transform: scale(1.2);
+            }
+        }
+        .readMoreBtn {
+            color: $black;
+            background: $primary;
+
+            * {
+                color: $black;
+            }
         }
     }
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import API_RESPONSE_TYPE from "../api/structure";
+import { ARTICLE_RESPONSE_TYPE } from "../api/reponseTypes";
 import classnames from "classnames";
 import styles from "../styles/newsSummary.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type NewsSummaryType = {
-    article: API_RESPONSE_TYPE;
+    article: ARTICLE_RESPONSE_TYPE;
     onClick: () => void;
     height: number;
 };
@@ -25,6 +26,7 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
             setDate(publishedAt.split("T")[0]);
         }, []);
 
+        const titleMaxCharacters = 100;
         return (
             <div
                 style={{ height: `${height}rem` }}
@@ -33,11 +35,22 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
                     [styles.container]: true,
                 })}
             >
-                <p className={styles.name}>{name}</p>
-                <p className={styles.title}>{title}</p>
-                <p className={styles.author}>{author}</p>
-                <p className={styles.date}>{date}</p>
-                <p className={styles.readMore}>Read More &rarr;</p>
+                <div className={styles.text}>
+                    <p className={styles.name}>{name}</p>
+                    <p className={styles.title}>
+                        {title.slice(0, titleMaxCharacters)}
+                        {`${title.length > titleMaxCharacters ? "..." : ""}`}
+                    </p>
+                    <p className={styles.author}>{author}</p>
+                    <p className={styles.date}>{date}</p>
+                    <p className={styles.readMore}>Read More &rarr;</p>
+                </div>
+                <div className={styles.readMoreBtn}>
+                    <FontAwesomeIcon
+                        className={styles.faIcon}
+                        icon={"caret-right"}
+                    />
+                </div>
             </div>
         );
     }
