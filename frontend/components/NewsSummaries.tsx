@@ -52,7 +52,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     }
                     baseUrl = "http://newsapi.org/v2/top-headlines?";
                     queryUrl = `category=${topic}&country=us${queryParams}&from=${dateString}&to=${dateString}&`;
-                    const apiKey = `apiKey=${process.env.API_KEY}`;
+                    const apiKey = `apiKey=${process.env.NEXT_PUBLIC_API_KEY}`;
 
                     const requestUrl = baseUrl + queryUrl + apiKey;
                     const res = await fetch(requestUrl);
