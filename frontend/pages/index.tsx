@@ -12,6 +12,7 @@ import styles from "../styles/index.module.scss";
 type HomePageType = {};
 
 const HomePage: React.FC<HomePageType> = () => {
+    // home page
     const [articleToShow, setArticleToShow] = useState<
         ARTICLE_RESPONSE_TYPE | undefined
     >(undefined);
