@@ -6,10 +6,33 @@ import {
 } from "../api/reponseTypes";
 import styles from "../styles/articleToShow.module.scss";
 import Link from "next/link";
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import classnames from "classnames";
 
 type ArticleToShowType = {
     article?: ARTICLE_RESPONSE_TYPE;
     sourcesInfo?: SOURCES_RESPONSE_TYPE[];
+};
+
+const containerVariants = {
+    initial: {
+        x: "100%",
+    },
+    animate: {
+        x: "0",
+    },
+};
+
+const titleVariants = {
+    initial: {
+        y: "20vh",
+    },
+    animate: {
+        y: 0,
+    },
+    exit: {
+        y: "20vh",
+    },
 };
 
 const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
@@ -17,7 +40,10 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
         const [body, setBody] = useState<JSX.Element>();
 
         useEffect(() => {
-            const createArticleBody = (article: ARTICLE_RESPONSE_TYPE) => {
+            // setInvisible(true);
+            const createArticleBody = (
+                article: ARTICLE_RESPONSE_TYPE
+            ): JSX.Element => {
                 const {
                     author,
                     description,
@@ -34,61 +60,78 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                 const checkIfValidImgPic = (img) => {
                     return img !== null && img !== "";
                 };
+
                 return (
-                    <div className={styles.container}>
-                        <div className={styles.thumbnail}>
-                            <img
-                                src={
-                                    checkIfValidImgPic(urlToImage)
-                                        ? urlToImage
-                                        : "defaultArticleImg.jpg"
-                                }
-                                alt="Thumbnail"
-                            />
-                        </div>
-                        <div className={styles.content}>
-                            <p className={styles.name}>{name}</p>
-                            <h1 className={styles.waterMarkName}>{name}</h1>
-                            <p className={styles.title}>
-                                <div className={styles.decBar} />
-                                {`${titleArr
-                                    .slice(0, titleMaxCharacters)
-                                    .join("")}${
-                                    titleArr.length > titleMaxCharacters
-                                        ? "..."
-                                        : ""
-                                }`}
-                            </p>
-                            <p className={styles.author}>{author}</p>
-                            <p className={styles.date}>
-                                {publishedAt.split("T")[0]}
-                            </p>
-                            <p className={styles.description}>
-                                {description !== null && description !== "" ? (
-                                    <> {description} </>
-                                ) : content !== null && content !== "" ? (
-                                    <>{content}</>
-                                ) : (
-                                    <>
-                                        {
-                                            sourcesInfo?.find((s) => {
-                                                return s.name === name;
-                                            }).description
-                                        }
-                                    </>
-                                )}
-                            </p>
-                            <div className={styles.link}>
-                                <Link href={url}>
-                                    <a target="_blank">
-                                        <span>Read Article</span>
-                                        <FontAwesomeIcon icon="external-link-alt" />
-                                        {/* &rarr; */}
-                                    </a>
-                                </Link>
+                    <>
+                        <motion.div
+                            className={classnames({
+                                [styles.container]: true,
+                            })}
+                        >
+                            <div className={styles.thumbnail}>
+                                <img
+                                    src={
+                                        checkIfValidImgPic(urlToImage)
+                                            ? urlToImage
+                                            : "defaultArticleImg.jpg"
+                                    }
+                                    alt="Thumbnail"
+                                />
                             </div>
-                        </div>
-                    </div>
+                            <div className={styles.content}>
+                                <p className={styles.name}>{name}</p>
+                                <h1 className={styles.waterMarkName}>{name}</h1>
+                                <AnimatePresence>
+                                    <motion.p
+                                        variants={titleVariants}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                        onLoad={(e) => alert("dummy render")}
+                                        layout
+                                        className={styles.title}
+                                    >
+                                        {`${titleArr
+                                            .slice(0, titleMaxCharacters)
+                                            .join("")}${
+                                            titleArr.length > titleMaxCharacters
+                                                ? "..."
+                                                : ""
+                                        }`}
+                                    </motion.p>
+                                </AnimatePresence>
+                                <p className={styles.author}>{author}</p>
+                                <p className={styles.date}>
+                                    {publishedAt.split("T")[0]}
+                                </p>
+                                <p className={styles.description}>
+                                    {description !== null &&
+                                    description !== "" ? (
+                                        <> {description} </>
+                                    ) : content !== null && content !== "" ? (
+                                        <>{content}</>
+                                    ) : (
+                                        <>
+                                            {
+                                                sourcesInfo?.find((s) => {
+                                                    return s.name === name;
+                                                }).description
+                                            }
+                                        </>
+                                    )}
+                                </p>
+                                <div className={styles.link}>
+                                    <Link href={url}>
+                                        <a target="_blank">
+                                            <span>Read Article</span>
+                                            <FontAwesomeIcon icon="external-link-alt" />
+                                            {/* &rarr; */}
+                                        </a>
+                                    </Link>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </>
                 );
             };
 

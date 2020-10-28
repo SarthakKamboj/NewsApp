@@ -1,6 +1,10 @@
 @import "base/variables.scss";
 @import "base/mixins.scss";
 
+.invisible {
+    opacity: 1;
+}
+
 .container {
     background: $black;
     width: 100%;
@@ -9,6 +13,7 @@
     height: calc(100vh - 150px);
     position: relative;
     overflow-y: hidden;
+    z-index: 2;
 
     .thumbnail {
         pointer-events: none;
@@ -35,6 +40,7 @@
         top: 40%;
         left: 0;
         pointer-events: none;
+        outline: none;
     }
 
     .content {

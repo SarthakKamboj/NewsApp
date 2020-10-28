@@ -11,9 +11,20 @@ $borderLightness: 30%;
     position: relative;
     border-radius: 1rem;
     cursor: pointer;
-
     transition: $transition;
 
+    .leftBorder {
+        position: absolute;
+        top: 50%;
+        bottom: 50%;
+        transform: translateY(-50%);
+        width: 1rem;
+        background: $primary;
+        left: 0;
+        height: 100%;
+        opacity: 0;
+        transition: $transition;
+    }
     .text {
         grid-area: text;
         width: 100%;
@@ -59,7 +70,16 @@ $borderLightness: 30%;
     }
 
     &:hover {
-        transform: scale(1.05);
+        // transform: scale(1.05);
+        // width: 105%;
+        // height: 105%;
+        // border-left: 1rem solid $primary;
+
+        .leftBorder {
+            // height: 100%;
+            opacity: 1;
+        }
+
         .text {
             .readMore {
                 transform: scale(1.2);

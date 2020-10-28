@@ -28,37 +28,34 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
             setDate(publishedAt.split("T")[0]);
         }, []);
 
-        const titleMaxCharacters = 100;
+        const titleMaxCharacters = 50;
         return (
-            <>
-                <div
-                    style={{ height: `${height}rem` }}
-                    onClick={onClick}
-                    className={classnames({
-                        [styles.container]: true,
-                        [styles.lastArticleOnPagination]: lastArticleOnPagination,
-                    })}
-                >
-                    <div className={styles.text}>
-                        <p className={styles.name}>{name}</p>
-                        <p className={styles.title}>
-                            {title.slice(0, titleMaxCharacters)}
-                            {`${
-                                title.length > titleMaxCharacters ? "..." : ""
-                            }`}
-                        </p>
-                        <p className={styles.author}>{author}</p>
-                        <p className={styles.date}>{date}</p>
-                        <p className={styles.readMore}>Read More &rarr;</p>
-                    </div>
-                    <div className={styles.readMoreBtn}>
-                        <FontAwesomeIcon
-                            className={styles.faIcon}
-                            icon={"caret-right"}
-                        />
-                    </div>
+            <div
+                style={{ height: `${height}rem` }}
+                onClick={onClick}
+                className={classnames({
+                    [styles.container]: true,
+                    [styles.lastArticleOnPagination]: lastArticleOnPagination,
+                })}
+            >
+                <div className={styles.leftBorder} />
+                <div className={styles.text}>
+                    <p className={styles.name}>{name}</p>
+                    <p className={styles.title}>
+                        {title.slice(0, titleMaxCharacters)}
+                        {`${title.length > titleMaxCharacters ? "..." : ""}`}
+                    </p>
+                    <p className={styles.author}>{author}</p>
+                    <p className={styles.date}>{date}</p>
+                    <p className={styles.readMore}>Read More &rarr;</p>
                 </div>
-            </>
+                <div className={styles.readMoreBtn}>
+                    <FontAwesomeIcon
+                        className={styles.faIcon}
+                        icon={"caret-right"}
+                    />
+                </div>
+            </div>
         );
     }
 );
