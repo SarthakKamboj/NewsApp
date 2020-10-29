@@ -26,9 +26,9 @@ const HomePage: React.FC<HomePageType> = () => {
 
     useEffect(() => {
         const fetchSources = async () => {
-            const key = process.env.NEXT_PUBLIC_API_KEY;
+            // const key = process.env.NEXT_PUBLIC_API_KEY;
             const res = await fetch(
-                `https://newsapi.org/v2/sources?apiKey=${key}`
+                `https://newsapi.org/v2/sources?apiKey=${process.env.NEXT_PUBLIC_BUSINESS_API_KEY}`
             );
             const json = await res.json();
             return json;
