@@ -50,7 +50,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     } else {
                         dateString = convertDateToString(date);
                     }
-                    baseUrl = "http://newsapi.org/v2/top-headlines?";
+                    baseUrl = "https://newsapi.org/v2/top-headlines?";
                     queryUrl = `category=${topic}&country=us${queryParams}&from=${dateString}&to=${dateString}&`;
                     const apiKey = `apiKey=${process.env.NEXT_PUBLIC_API_KEY}`;
 
