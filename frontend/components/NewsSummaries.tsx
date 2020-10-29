@@ -56,6 +56,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     const apiKey = `apiKey=${process.env.NEXT_PUBLIC_API_KEY}`;
 
                     const requestUrl = baseUrl + queryUrl + apiKey;
+                    alert("making top headlines request");
                     const res = await fetch(requestUrl);
                     alert("request made");
                     return await res.json();
