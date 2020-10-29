@@ -38,6 +38,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
         };
 
         useEffect(() => {
+            alert("use effect");
             const requestAndUpdate = async () => {
                 const makeRequest = async (): Promise<any> => {
                     let baseUrl;
@@ -56,9 +57,11 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
 
                     const requestUrl = baseUrl + queryUrl + apiKey;
                     const res = await fetch(requestUrl);
+                    alert("request made");
                     return await res.json();
                 };
                 const extractArticles = ({ articles }) => {
+                    alert("going to start extracting process");
                     const apiResArticles: ARTICLE_RESPONSE_TYPE[] = articles.map(
                         (article) => {
                             return article as ARTICLE_RESPONSE_TYPE;
@@ -76,7 +79,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                 setAllArticles(articlesToRender);
                 alert("articles set");
                 setPaginationGroup(0);
-
+                alert("pagination set to 0");
                 setLoading(false);
             };
             setLoading(true);
