@@ -72,7 +72,9 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
 
                 const json = await makeRequest();
                 const articlesToRender = extractArticles(json);
+                alert("articles extracted");
                 setAllArticles(articlesToRender);
+                alert("articles set");
                 setPaginationGroup(0);
 
                 setLoading(false);
