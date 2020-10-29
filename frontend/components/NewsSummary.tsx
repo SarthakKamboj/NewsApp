@@ -1,14 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { ARTICLE_RESPONSE_TYPE } from "../api/reponseTypes";
+import { ARTICLE_RESPONSE_TYPE } from "../types/apiReponseTypes";
 import classnames from "classnames";
 import styles from "../styles/newsSummary.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
+import { genericAnimationType } from "../types/genericAnimationType";
 
 type NewsSummaryType = {
     article: ARTICLE_RESPONSE_TYPE;
     onClick: () => void;
     height: number;
     lastArticleOnPagination: boolean;
+};
+
+const animatePTagVariants: genericAnimationType = {
+    initial: {
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+        },
+    },
+};
+
+const pTagVariants: genericAnimationType = {
+    initial: {
+        opacity: 0,
+        y: 20,
+    },
+    animate: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "tween",
+            duration: 0.5,
+        },
+    },
 };
 
 const NewsSummary: React.FC<NewsSummaryType> = React.memo(
@@ -28,9 +57,9 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
             setDate(publishedAt.split("T")[0]);
         }, []);
 
-        const titleMaxCharacters = 50;
+        const titleMaxCharacters = 40;
         return (
-            <div
+            <motion.div
                 style={{ height: `${height}rem` }}
                 onClick={onClick}
                 className={classnames({
@@ -39,23 +68,60 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
                 })}
             >
                 <div className={styles.leftBorder} />
-                <div className={styles.text}>
-                    <p className={styles.name}>{name}</p>
-                    <p className={styles.title}>
+                <motion.div
+                    variants={animatePTagVariants}
+                    animate="animate"
+                    className={styles.text}
+                >
+                    <motion.p
+                        variants={pTagVariants}
+                        initial="initial"
+                        animate="animate"
+                        className={styles.name}
+                    >
+                        {name}
+                    </motion.p>
+                    <motion.p
+                        variants={pTagVariants}
+                        initial={"initial"}
+                        animate={"animate"}
+                        className={styles.title}
+                    >
                         {title.slice(0, titleMaxCharacters)}
                         {`${title.length > titleMaxCharacters ? "..." : ""}`}
-                    </p>
-                    <p className={styles.author}>{author}</p>
-                    <p className={styles.date}>{date}</p>
-                    <p className={styles.readMore}>Read More &rarr;</p>
-                </div>
+                    </motion.p>
+                    <motion.p
+                        variants={pTagVariants}
+                        initial="initial"
+                        animate="animate"
+                        className={styles.author}
+                    >
+                        {author}
+                    </motion.p>
+                    <motion.p
+                        variants={pTagVariants}
+                        initial="initial"
+                        animate="animate"
+                        className={styles.date}
+                    >
+                        {date}
+                    </motion.p>
+                    <motion.p
+                        variants={pTagVariants}
+                        initial="initial"
+                        animate="animate"
+                        className={styles.readMore}
+                    >
+                        Read More &rarr;
+                    </motion.p>
+                </motion.div>
                 <div className={styles.readMoreBtn}>
                     <FontAwesomeIcon
                         className={styles.faIcon}
                         icon={"caret-right"}
                     />
                 </div>
-            </div>
+            </motion.div>
         );
     }
 );

@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import { useEffect, useState } from "react";
-import { ARTICLE_RESPONSE_TYPE } from "../api/reponseTypes";
+import { ARTICLE_RESPONSE_TYPE } from "../types/apiReponseTypes";
 import styles from "../styles/newsSummaries.module.scss";
 import NewsSummary from "./NewsSummary";
 import Pagination from "./Pagination";
@@ -15,7 +15,7 @@ type NewsSummariesType = {
     setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-type topicsType = "sports" | "entertainment" | /*"all" |*/ "technology";
+type topicsType = "sports" | "entertainment" | "technology";
 
 const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
     ({ setArticleToShow, date, query }) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
     ARTICLE_RESPONSE_TYPE,
     SOURCES_RESPONSE_TYPE,
-} from "../api/reponseTypes";
+} from "../types/apiReponseTypes";
 import ArticleToShow from "../components/ArticleToShow";
 import Logo from "../components/Logo";
 import NavBar from "../components/NavBar";

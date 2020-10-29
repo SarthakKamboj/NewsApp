@@ -2,7 +2,7 @@
 @import "base/mixins.scss";
 
 .invisible {
-    opacity: 1;
+    opacity: 0;
 }
 
 .container {
@@ -14,6 +14,14 @@
     position: relative;
     overflow-y: hidden;
     z-index: 2;
+
+    .animationContainer {
+        overflow: hidden;
+        .p {
+            width: 100%;
+            height: 100%;
+        }
+    }
 
     .thumbnail {
         pointer-events: none;
@@ -36,7 +44,7 @@
         color: rgba(1, 1, 1, 0);
         position: absolute;
         transform: translateY(-50%);
-        font-size: 20rem;
+        font-size: 10rem;
         top: 40%;
         left: 0;
         pointer-events: none;
@@ -50,14 +58,14 @@
         display: grid;
         $name-row-height: 3rem;
         $author-row-height: 1.25rem;
-        $title-row-height: 17rem;
+        $title-row-height: 16.25rem;
         $desc-row-height: 7rem;
         $date-row-height: 2rem;
         $link-row-height: 4rem;
         grid-template-rows: $name-row-height 1fr $author-row-height $title-row-height $desc-row-height $date-row-height $link-row-height 1fr;
         grid-template-columns: repeat(5, 1fr);
         grid-template-areas:
-            ". . name . ."
+            ". . . . ."
             ". . name . ."
             ". author author . ."
             ". title title . ."
@@ -84,20 +92,21 @@
             color: $white;
             grid-area: name;
             width: 100%;
-            text-align: center;
-            @include flexCenter;
             font-weight: bold;
-            font-size: 2rem;
-            // background: green;
+            font-size: 1rem;
+            text-align: center;
+            // word-break: break-all;
+            // background: blue;
+            // border: 2px solid red;
         }
+
         .title {
             color: $white;
             font-weight: bold;
-            font-size: 4rem;
+            font-size: 1.5rem;
             grid-area: title;
             font-weight: 700;
             position: relative;
-            @include flexCenter;
 
             .decBar {
                 position: absolute;
@@ -111,21 +120,20 @@
         }
 
         .author {
-            font-size: 1rem;
+            font-size: 0.5rem;
             grid-area: author;
             display: flex;
-            align-items: center;
         }
 
         .date {
-            font-size: 1.2rem;
+            font-size: 0.6rem;
             grid-area: date;
             display: flex;
         }
 
         .description {
-            font-size: 1.15rem;
-            line-height: 150%;
+            font-size: 0.6rem;
+            line-height: 1.5rem;
             grid-area: description;
         }
 
@@ -133,7 +141,7 @@
             text-decoration: none;
             grid-area: link;
             transition: all 0.2s;
-            font-size: 1.5rem;
+            font-size: 0.7rem;
             transform-origin: 0 0;
             display: flex;
 
