@@ -8,6 +8,7 @@ import Logo from "../components/Logo";
 import NavBar from "../components/NavBar";
 import NewsSummaries from "../components/NewsSummaries";
 import styles from "../styles/index.module.scss";
+import Head from "next/head";
 
 type HomePageType = {};
 
@@ -46,6 +47,9 @@ const HomePage: React.FC<HomePageType> = () => {
 
     return (
         <div className={styles.container}>
+            <Head>
+                <link rel="icon" href="favicon.ico" />
+            </Head>
             <span className={styles.navBar}>
                 <NavBar setQuery={setQuery} />
             </span>
