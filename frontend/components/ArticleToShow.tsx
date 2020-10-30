@@ -10,13 +10,14 @@ import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import classnames from "classnames";
 import { genericAnimationType } from "../types/genericAnimationType";
 import AnimatedComponent from "./AnimatedComponent";
+import ArticleName from "./ArticleName";
 
 type ArticleToShowType = {
     article?: ARTICLE_RESPONSE_TYPE;
     sourcesInfo?: SOURCES_RESPONSE_TYPE[];
 };
 
-const animationTime = 1;
+const animationTime = 0.6;
 
 const titleYChange = 500;
 const titleVariant: genericAnimationType = {
@@ -136,7 +137,7 @@ const descriptionVariant: genericAnimationType = {
     },
 };
 
-const thumbnailChangeX = 1300;
+const thumbnailChangeX = 1500;
 const thumbnailVariant: genericAnimationType = {
     initial: {
         opacity: 0,
@@ -159,11 +160,11 @@ const thumbnailVariant: genericAnimationType = {
 
 const linkVariant: genericAnimationType = {
     initial: {
-        opacity: 0,
+        // opacity: 0,
         scale: 0,
     },
     animate: {
-        opacity: 1,
+        // opacity: 1,
         scale: 1,
         transition: {
             duration: animationTime,
@@ -171,7 +172,7 @@ const linkVariant: genericAnimationType = {
         },
     },
     exit: {
-        opacity: 0,
+        // opacity: 0,
         scale: 0,
         transition: {
             duration: animationTime,
@@ -200,6 +201,29 @@ const dateVariant: genericAnimationType = {
         transition: {
             duration: animationTime,
             // type: "tween",
+        },
+    },
+};
+
+const noArticleSelectedVariant: genericAnimationType = {
+    initial: {
+        opacity: 0,
+        scale: 0,
+    },
+    animate: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            duration: animationTime,
+            type: "tween",
+        },
+    },
+    exit: {
+        opacity: 0,
+        scale: 0,
+        transition: {
+            duration: animationTime,
+            type: "tween",
         },
     },
 };
@@ -236,15 +260,27 @@ const baseTitleStyle: { readonly [key: string]: boolean } = {
     [styles.title]: true,
 };
 
-const isValid = (s: string) => s !== undefined && s !== null;
+const baseNoArticleSelectedStyle: { readonly [key: string]: boolean } = {
+    [styles.noArticleSelected]: true,
+};
+
+const isValid = (s: string) => s !== undefined && s !== null && s !== "";
 
 const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
-    ({ article, sourcesInfo, children }) => {
+    ({ article, sourcesInfo }) => {
         if (article === null || article === undefined) {
             return (
-                <div className={styles.noArticleSelected}>
-                    Please Select an Article
-                </div>
+                <AnimatedComponent
+                    baseClassNames={baseNoArticleSelectedStyle}
+                    content={"Please Select an Article"}
+                    dependency={article}
+                    variant={noArticleSelectedVariant}
+                    animationTime={animationTime}
+                    TypeComponentToDisplay={motion.p}
+                />
+                // <div className={styles.noArticleSelected}>
+                //     Please Select an Article
+                // </div>
             );
         }
         const {
@@ -283,11 +319,8 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
             }, animationTime * 1000);
         }, [article]);
 
-        const titleMaxCharacters = 30;
+        const titleMaxCharacters = 70;
 
-        const checkIfValidImgPic = (img): boolean => {
-            return img !== null && img !== "";
-        };
         return (
             <AnimateSharedLayout>
                 <motion.div
@@ -299,13 +332,15 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                     })}
                 >
                     <AnimatedComponent
+                        TypeComponentToDisplay={motion.h1}
                         baseClassNames={baseThumbnailStyle}
                         variant={thumbnailVariant}
                         animationTime={animationTime}
+                        dependency={urlToImage}
                         content={
                             <img
                                 src={
-                                    checkIfValidImgPic(urlToImage)
+                                    isValid(urlToImage)
                                         ? urlToImage
                                         : "defaultArticleImg.jpg"
                                 }
@@ -326,16 +361,20 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                     <div className={styles.content}>
                         {/* <p className={styles.name}>{name}</p> */}
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.div}
                             variant={baseNameVariant}
                             animationTime={animationTime}
                             baseClassNames={baseNameStyle}
-                            content={name}
+                            dependency={name}
+                            content={<ArticleName name={name} />}
                         />
 
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.h1}
                             variant={waterMarkVariant}
                             animationTime={animationTime}
                             content={name}
+                            dependency={name}
                             baseClassNames={baseWaterMarkStyles}
                         />
                         {/* <div
@@ -388,14 +427,21 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             </AnimatePresence>
                         </div> */}
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.h1}
                             variant={titleVariant}
-                            content={title}
+                            content={`${title.substring(
+                                0,
+                                titleMaxCharacters
+                            )}...`}
                             animationTime={animationTime}
                             baseClassNames={baseTitleStyle}
+                            dependency={title}
                         />
                         {/* <p className={styles.author}>{author}</p> */}
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseAuthorStyle}
+                            dependency={author}
                             variant={authorVariant}
                             animationTime={animationTime}
                             content={author}
@@ -410,15 +456,19 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             {publishedAt.split("T")[0]}
                         </p> */}
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseDateStyle}
+                            dependency={publishedAt}
                             variant={dateVariant}
                             animationTime={animationTime}
                             content={publishedAt.split("T")[0]}
                         />
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseDescriptionStyle}
                             animationTime={animationTime}
                             variant={descriptionVariant}
+                            dependency={article}
                             content={
                                 isValid(description)
                                     ? `${description.substring(
@@ -462,9 +512,11 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             </Link>
                         </div> */}
                         <AnimatedComponent
+                            TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseLinkStyle}
                             variant={linkVariant}
                             animationTime={animationTime}
+                            dependency={article}
                             content={
                                 <Link href={url}>
                                     <a target="_blank">
