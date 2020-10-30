@@ -64,7 +64,6 @@ const AnimatedComponent: React.FC<AnimatedComponentType> = ({
                         exit={exit}
                         layout
                         className={styles.p}
-                        onMouseOver={() => console.log("hover start")}
                     >
                         {contentToShow}
                     </TypeComponentToDisplay>

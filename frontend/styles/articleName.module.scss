@@ -1,0 +1,30 @@
+@import "base/mixins.scss";
+@import "base/variables.scss";
+
+.name {
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    padding: 0.6rem;
+    overflow: visible;
+    z-index: 3;
+
+    &:after {
+        transition: $transition;
+        content: "";
+        width: 0;
+        height: 0.2rem;
+        background: $white;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+    }
+
+    &:hover {
+        &:after {
+            width: 2rem;
+        }
+    }
+}

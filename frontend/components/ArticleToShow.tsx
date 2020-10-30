@@ -10,7 +10,6 @@ import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import classnames from "classnames";
 import { genericAnimationType } from "../types/genericAnimationType";
 import AnimatedComponent from "./AnimatedComponent";
-import ArticleName from "./ArticleName";
 
 type ArticleToShowType = {
     article?: ARTICLE_RESPONSE_TYPE;
@@ -366,7 +365,10 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             animationTime={animationTime}
                             baseClassNames={baseNameStyle}
                             dependency={name}
-                            content={<ArticleName name={name} />}
+                            content={
+                                <p className={styles.name}>{name}</p>
+                                // <ArticleName source={sourceInfo} name={name} />
+                            }
                         />
 
                         <AnimatedComponent
@@ -374,7 +376,7 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             variant={waterMarkVariant}
                             animationTime={animationTime}
                             content={name}
-                            dependency={name}
+                            dependency={article}
                             baseClassNames={baseWaterMarkStyles}
                         />
                         {/* <div
