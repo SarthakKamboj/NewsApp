@@ -277,9 +277,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                     animationTime={animationTime}
                     TypeComponentToDisplay={motion.p}
                 />
-                // <div className={styles.noArticleSelected}>
-                //     Please Select an Article
-                // </div>
             );
         }
         const {
@@ -297,35 +294,11 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
             return s.name === name;
         });
 
-        const [displayTitle, setDisplayTitle] = useState(true);
-        const [titleArrToDisplay, setTitleArrToDisplay] = useState<string[]>(
-            title.split("")
-        );
-
-        const [displayWaterMark, setDisplayWaterMark] = useState(true);
-        const [waterMarkName, setWaterMarKName] = useState<string>(name);
-
-        useEffect(() => {
-            setDisplayTitle(false);
-            setDisplayWaterMark(false);
-
-            setTimeout(() => {
-                setTitleArrToDisplay(article.title.split(""));
-                setDisplayTitle(true);
-
-                setWaterMarKName(article.source.name);
-                setDisplayWaterMark(true);
-            }, animationTime * 1000);
-        }, [article]);
-
         const titleMaxCharacters = 70;
 
         return (
             <AnimateSharedLayout>
                 <motion.div
-                    // variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
                     className={classnames({
                         [styles.container]: true,
                     })}
@@ -335,7 +308,7 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                         baseClassNames={baseThumbnailStyle}
                         variant={thumbnailVariant}
                         animationTime={animationTime}
-                        dependency={urlToImage}
+                        dependency={article}
                         content={
                             <img
                                 src={
@@ -347,28 +320,14 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             />
                         }
                     />
-                    {/* <div className={styles.thumbnail}>
-                        <img
-                            src={
-                                checkIfValidImgPic(urlToImage)
-                                    ? urlToImage
-                                    : "defaultArticleImg.jpg"
-                            }
-                            alt="Thumbnail"
-                        />
-                    </div> */}
                     <div className={styles.content}>
-                        {/* <p className={styles.name}>{name}</p> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.div}
                             variant={baseNameVariant}
                             animationTime={animationTime}
                             baseClassNames={baseNameStyle}
-                            dependency={name}
-                            content={
-                                <p className={styles.name}>{name}</p>
-                                // <ArticleName source={sourceInfo} name={name} />
-                            }
+                            dependency={article}
+                            content={<p className={styles.name}>{name}</p>}
                         />
 
                         <AnimatedComponent
@@ -379,55 +338,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             dependency={article}
                             baseClassNames={baseWaterMarkStyles}
                         />
-                        {/* <div
-                            className={classnames({
-                                [styles.waterMarkName]: true,
-                                [styles.animationContainer]: true,
-                            })}
-                        >
-                            <AnimatePresence>
-                                {displayWaterMark && (
-                                    <motion.h1
-                                        variants={waterMarkVariant}
-                                        initial="initial"
-                                        animate="animate"
-                                        exit="exit"
-                                        layout
-                                        className={styles.p}
-                                    >
-                                        {waterMarkName}
-                                    </motion.h1>
-                                )}
-                            </AnimatePresence>
-                        </div> */}
-                        {/* <div
-                            className={classnames({
-                                [styles.title]: true,
-                                [styles.animationContainer]: true,
-                            })}
-                        >
-                            <AnimatePresence>
-                                {displayTitle && (
-                                    <motion.p
-                                        variants={titleVariant}
-                                        initial="initial"
-                                        animate="animate"
-                                        exit="exit"
-                                        className={styles.p}
-                                        layout
-                                    >
-                                        {titleArrToDisplay
-                                            .slice(0, titleMaxCharacters)
-                                            .join("")}
-                                        {titleArrToDisplay.length >
-                                        titleMaxCharacters
-                                            ? "..."
-                                            : ""}
-                                        `
-                                    </motion.p>
-                                )}
-                            </AnimatePresence>
-                        </div> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             variant={titleVariant}
@@ -439,7 +349,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             baseClassNames={baseTitleStyle}
                             dependency={title}
                         />
-                        {/* <p className={styles.author}>{author}</p> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseAuthorStyle}
@@ -448,15 +357,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             animationTime={animationTime}
                             content={author}
                         />
-                        {/* <AnimatedComponent
-                            baseClassNames={baseAuthorStyle}
-                            variant={authorVariant}
-                            animationTime={animationTime}
-                            content={author}
-                        /> */}
-                        {/* <p className={styles.date}>
-                            {publishedAt.split("T")[0]}
-                        </p> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseDateStyle}
@@ -490,29 +390,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                                     : ""
                             }
                         />
-                        {/* <p className={styles.description}>
-                            {description !== null && description !== "" ? (
-                                <> {description} </>
-                            ) : content !== null && content !== "" ? (
-                                <>{content}</>
-                            ) : (
-                                <>
-                                    {
-                                        sourcesInfo?.find((s) => {
-                                            return s.name === name;
-                                        }).description
-                                    }
-                                </>
-                            )}
-                        </p> */}
-                        {/* <div className={styles.link}>
-                            <Link href={url}>
-                                <a target="_blank">
-                                    <span>Read Article</span>
-                                    <FontAwesomeIcon icon="external-link-alt" />
-                                </a>
-                            </Link>
-                        </div> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             baseClassNames={baseLinkStyle}
