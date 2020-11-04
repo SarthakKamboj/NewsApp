@@ -159,11 +159,9 @@ const thumbnailVariant: genericAnimationType = {
 
 const linkVariant: genericAnimationType = {
     initial: {
-        // opacity: 0,
         scale: 0,
     },
     animate: {
-        // opacity: 1,
         scale: 1,
         transition: {
             duration: animationTime,
@@ -171,7 +169,6 @@ const linkVariant: genericAnimationType = {
         },
     },
     exit: {
-        // opacity: 0,
         scale: 0,
         transition: {
             duration: animationTime,
@@ -191,7 +188,6 @@ const dateVariant: genericAnimationType = {
         x: 0,
         transition: {
             duration: animationTime,
-            // type: "tween",
         },
     },
     exit: {
@@ -199,7 +195,6 @@ const dateVariant: genericAnimationType = {
         x: dateChangeX,
         transition: {
             duration: animationTime,
-            // type: "tween",
         },
     },
 };
