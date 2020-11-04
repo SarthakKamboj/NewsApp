@@ -57,7 +57,7 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
             setDate(publishedAt.split("T")[0]);
         }, []);
 
-        const titleMaxCharacters = 40;
+        const titleMaxCharacters = 30;
         return (
             <motion.div
                 style={{ height: `${height}rem` }}
