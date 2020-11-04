@@ -10,7 +10,8 @@ type InputWrapperType = {
 const InputWrapper: React.FC<InputWrapperType> = ({ setQuery }) => {
     const inputRef = useRef<HTMLInputElement>();
     const [inputVal, setInputVal] = useState<string>("");
-    const searchOnClick = () => {
+    const searchOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         setQuery(inputVal.replace(" ", "-"));
     };
     const clearClick = () => {
@@ -19,7 +20,7 @@ const InputWrapper: React.FC<InputWrapperType> = ({ setQuery }) => {
     };
     return (
         <section className={styles.container}>
-            <div className={styles.inputContainer}>
+            <form className={styles.inputContainer}>
                 <input
                     placeholder={"Search"}
                     type={"text"}
@@ -32,10 +33,10 @@ const InputWrapper: React.FC<InputWrapperType> = ({ setQuery }) => {
                     })}
                 />
 
-                <div className={styles.search}>
-                    <FontAwesomeIcon onClick={searchOnClick} icon={"search"} />
-                </div>
-            </div>
+                <button onClick={searchOnClick} className={styles.search}>
+                    <FontAwesomeIcon icon={"search"} />
+                </button>
+            </form>
             <h4 className={styles.clear} onClick={clearClick}>
                 Clear Search
             </h4>

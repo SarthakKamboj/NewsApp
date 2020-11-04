@@ -31,6 +31,7 @@
         .search {
             height: 100%;
             width: 100%;
+            border: 2px $black solid;
             grid-area: search;
             color: $primary;
             cursor: pointer;
