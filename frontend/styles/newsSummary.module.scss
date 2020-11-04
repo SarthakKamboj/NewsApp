@@ -41,6 +41,7 @@ $borderLightness: 30%;
         .author,
         .date {
             color: $grey;
+            overflow-y: hidden;
         }
 
         .title {
@@ -59,6 +60,7 @@ $borderLightness: 30%;
             transition: all 0.2s;
             height: 1.6rem;
             transform-origin: 0 0;
+            overflow-y: hidden;
         }
     }
     .readMoreBtn {
