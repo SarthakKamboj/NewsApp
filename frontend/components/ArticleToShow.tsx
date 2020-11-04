@@ -289,7 +289,7 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
             return s.name === name;
         });
 
-        const titleMaxCharacters = 70;
+        const titleMaxCharacters = 50;
 
         return (
             <AnimateSharedLayout>
