@@ -65,7 +65,7 @@
         display: grid;
         $name-row-height: 3rem;
         $author-row-height: 1.25rem;
-        $title-row-height: 16.25rem;
+        $title-row-height: 10rem;
         $desc-row-height: 7rem;
         $date-row-height: 2rem;
         $link-row-height: 4rem;
@@ -116,7 +116,7 @@
 
             overflow: hidden;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             grid-area: title;
             font-weight: 700;
             position: relative;
@@ -160,7 +160,7 @@
             grid-area: link;
             transition: all 0.2s;
             // font-size: 1.25rem;
-            font-size: 0.7rem;
+            font-size: 0.5rem;
             font-weight: bold;
             transform-origin: 0 0;
             display: flex;
@@ -170,7 +170,7 @@
             a {
                 color: $black;
                 height: 2.8rem;
-                width: 15rem;
+                width: 12rem;
                 @include flexCenter;
                 transition: $transition;
                 text-decoration: none;

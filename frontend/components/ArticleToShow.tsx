@@ -325,14 +325,14 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             content={<p className={styles.name}>{name}</p>}
                         />
 
-                        <AnimatedComponent
+                        {/* <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             variant={waterMarkVariant}
                             animationTime={animationTime}
                             content={name}
                             dependency={article}
                             baseClassNames={baseWaterMarkStyles}
-                        />
+                        /> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             variant={titleVariant}
