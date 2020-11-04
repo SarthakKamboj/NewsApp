@@ -111,7 +111,7 @@ const baseNameVariant: genericAnimationType = {
     },
 };
 
-const maxDescriptionCharacters = 140;
+const maxDescriptionCharacters = 100;
 const descriptionYChange = -200;
 const descriptionVariant: genericAnimationType = {
     initial: {

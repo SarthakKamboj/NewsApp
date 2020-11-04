@@ -164,13 +164,13 @@
             font-weight: bold;
             transform-origin: 0 0;
             display: flex;
-
+            width: 75%;
             overflow: hidden;
 
             a {
                 color: $black;
                 height: 2.8rem;
-                width: 12rem;
+                // width: 10rem;
                 @include flexCenter;
                 transition: $transition;
                 text-decoration: none;
