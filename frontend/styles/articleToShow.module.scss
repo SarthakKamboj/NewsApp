@@ -136,8 +136,7 @@
         .author {
             font-size: 0.5rem;
             grid-area: author;
-
-            overflow: hidden;
+            overflow-y: hidden;
             display: flex;
         }
 
