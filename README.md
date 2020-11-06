@@ -2,7 +2,7 @@
 This is a news application I developed for the Capital One Summit. It servers as an easy and reliable way to access information about current events about sports, entertainment, and technology.
 
 <h2>Development Challenges/Solutions</h2>
-For this application, I focused on ensuring I take advantage of the modularity that comes with React Components and apply them whenever necessary. Some notable use cases I found were wrapping the JSX elements I wanted to animate into higher-level components and creating re-usable components to list the articles received from the API. <br />
+For this application, I focused on ensuring I take advantage of the modularity that comes with React Components and apply them whenever necessary. Some notable use cases I found were wrapping the JSX elements I wanted to animate into higher-level components and creating re-usable components to list the articles received from the API. <br /><br />
 
 In the first situation, I knew I wanted to animate the primary article I display with initial and exit animations. However, I quickly found myself wrapping each element in its own container and creating a boolean state values associate with said element. Understanding this is not the optimal solution, I decided to create a component that handled this logic. By abstracting the animation logic into a separate component, I was able to easily add additional functionality such as style inheritance and event-based triggers. Moreover, when I used this component in my ArticleToShow component, it allowed for better code-readility and less state variables to handle for.
 
