@@ -19,15 +19,17 @@ To style the components, I used Sass modules for two reasons: enhanced styling c
 Lastly, I decided to use Typescript for this application since it allowed for enhanced code readability and strong type checking. in both situations, the results included faster and more effective development as Typescript informed me of whatever properties I need to pass into components while also specifying what purpose a specific component or function may have had. <br />
 
 <h3>Developer: Sarthak Kamboj</h3>
-<h4>Tech Stack</h4>
+<h4>Built With</h4>
 <ul>
-   <li>Frontend Framework: NextJs</li>
-   <li>Primary Packages Used
-   <ul>
-        <li>Framer Motion (Animations)</li>
-        <li>Sass Modules(For CSS Preprocessing)</li>
-   </ul>
-   </li>
+    <li>Frontend Framework: NextJs</li>
+    <li>Animations: Framer Motion</li>
+    <li>Styling: Sass Modules</li>
+    <li>Coding: TypeScript</li>
 </ul>
-<h4>Overview</h4>
-<h6>My goal for this news application was to create a </h6>
+
+<h4>Installation</h4>
+<ol>
+    <li>Move into the frontend directory</li>
+    <li>Run "npm i"</li>
+    <li>Run "npm run dev"</li>
+</ol>
