@@ -1,6 +1,6 @@
 import { genericAnimationType } from "../types/genericAnimationType";
 
-export const animationTime = 0.6;
+export const animationTime = 0.8;
 
 const titleYChange = 500;
 export const titleVariant: genericAnimationType = {
