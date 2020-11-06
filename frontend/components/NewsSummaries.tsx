@@ -27,9 +27,15 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
         >([]);
 
         const newsSummaryHeight = 13.25;
-        const minArticlesToShow = 3;
+        const numArticlesToShow = 3;
+
+        // represents the specific group of articles which are being shown
         const [paginationGroup, setPaginationGroup] = useState<number>(0);
+
+        // represents the total number of pagination pages
         const [groupsOfArticles, setGroupsOfArticles] = useState<number>(0);
+
+        // topic for search to search for
         const [topic, setTopic] = useState<topicsType>("sports");
 
         const convertDateToString = (d: Date) => {
@@ -61,7 +67,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                         }
                     );
                     setGroupsOfArticles(
-                        Math.ceil(apiResArticles.length / minArticlesToShow)
+                        Math.ceil(apiResArticles.length / numArticlesToShow)
                     );
                     return apiResArticles;
                 };
@@ -82,8 +88,8 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                 if (allArticles) {
                     setArticles(
                         allArticles.slice(
-                            paginationGroup * minArticlesToShow,
-                            (paginationGroup + 1) * minArticlesToShow
+                            paginationGroup * numArticlesToShow,
+                            (paginationGroup + 1) * numArticlesToShow
                         )
                     );
                 }

@@ -29,7 +29,6 @@ const InputWrapper: React.FC<InputWrapperType> = ({ setQuery }) => {
                     value={inputVal}
                     className={classnames({
                         [styles.input]: true,
-                        [styles.inputActive]: inputVal?.length > 0,
                     })}
                 />
 

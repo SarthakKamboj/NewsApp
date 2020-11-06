@@ -21,7 +21,7 @@ const Pagination: React.FC<PaginationType> = ({
     };
     return (
         <ul className={styles.container} ref={paginationContainerRef}>
-            {Array.from(Array(groups), (e, idx) => {
+            {Array.from(Array(groups), (_, idx) => {
                 if (idx > maxPaginationNumsToShowAtOnce - 1) return;
                 return (
                     <li

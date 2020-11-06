@@ -1,3 +1,8 @@
+// This file declares the various states through the animation for the animated components
+// initial represents the initial state
+// animate specifies the properties after the animation finishes as well as the animation's duration and type
+// exit represents the animation upon re-render (usually the same as the inital state)
+
 import { genericAnimationType } from "../types/genericAnimationType";
 
 export const animationTime = 0.8;

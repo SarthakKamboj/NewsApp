@@ -13,7 +13,7 @@ type NewsSummaryType = {
     lastArticleOnPagination: boolean;
 };
 
-const animatePTagVariants: genericAnimationType = {
+const animateDivTagVariants: genericAnimationType = {
     initial: {
         opacity: 0,
     },
@@ -40,6 +40,8 @@ const pTagVariants: genericAnimationType = {
     },
 };
 
+// This is the component that is shown on the side with
+// basic information about the article
 const NewsSummary: React.FC<NewsSummaryType> = React.memo(
     ({
         height,
@@ -69,7 +71,7 @@ const NewsSummary: React.FC<NewsSummaryType> = React.memo(
             >
                 <div className={styles.leftBorder} />
                 <motion.div
-                    variants={animatePTagVariants}
+                    variants={animateDivTagVariants}
                     animate="animate"
                     className={styles.text}
                 >

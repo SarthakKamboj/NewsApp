@@ -19,7 +19,11 @@ const HomePage: React.FC<HomePageType> = () => {
 
     const [sourcesInfo, setSourcesInfo] = useState<SOURCES_RESPONSE_TYPE[]>([]);
 
+    // This is a function that sets triggers a new GET request
+    // whenever a term has been searched
     const [query, setQuery] = useState<string>("");
+
+    // This is to prevent unnecessary re-renders
     const memArticleToShow = useMemo(() => articleToShow, [articleToShow]);
 
     useEffect(() => {
@@ -35,7 +39,6 @@ const HomePage: React.FC<HomePageType> = () => {
             const sourcesArr = sources.map(
                 (source) => source as SOURCES_RESPONSE_TYPE
             );
-            console.log(sourcesArr);
             setSourcesInfo(sourcesArr);
         };
 

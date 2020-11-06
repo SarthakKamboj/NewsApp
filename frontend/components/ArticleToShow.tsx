@@ -48,9 +48,10 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                     baseClassNames={baseNoArticleSelectedStyle}
                     content={"Please Select an Article"}
                     dependency={article}
+                    styles={styles}
                     variant={noArticleSelectedVariant}
                     animationTime={animationTime}
-                    TypeComponentToDisplay={motion.p}
+                    FramerComponentToDisplay={motion.p}
                 />
             );
         }
@@ -79,11 +80,12 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                     })}
                 >
                     <AnimatedComponent
-                        TypeComponentToDisplay={motion.h1}
+                        FramerComponentToDisplay={motion.h1}
                         baseClassNames={baseThumbnailStyle}
                         variant={thumbnailVariant}
                         animationTime={animationTime}
                         dependency={article}
+                        styles={styles}
                         content={
                             <img
                                 src={
@@ -97,17 +99,19 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                     />
                     <div className={styles.content}>
                         <AnimatedComponent
-                            TypeComponentToDisplay={motion.div}
+                            FramerComponentToDisplay={motion.div}
                             variant={baseNameVariant}
                             animationTime={animationTime}
+                            styles={styles}
                             baseClassNames={baseNameStyle}
                             dependency={article}
                             content={<p className={styles.name}>{name}</p>}
                         />
 
                         <AnimatedComponent
-                            TypeComponentToDisplay={motion.h1}
+                            FramerComponentToDisplay={motion.h1}
                             variant={titleVariant}
+                            styles={styles}
                             content={`${title.substring(
                                 0,
                                 titleMaxCharacters
@@ -117,27 +121,30 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             dependency={title}
                         />
                         <AnimatedComponent
-                            TypeComponentToDisplay={motion.h1}
+                            FramerComponentToDisplay={motion.h1}
                             baseClassNames={baseAuthorStyle}
                             dependency={author}
+                            styles={styles}
                             variant={authorVariant}
                             animationTime={animationTime}
                             content={author}
                         />
                         <AnimatedComponent
-                            TypeComponentToDisplay={motion.h1}
+                            FramerComponentToDisplay={motion.h1}
                             baseClassNames={baseDateStyle}
                             dependency={publishedAt}
                             variant={dateVariant}
+                            styles={styles}
                             animationTime={animationTime}
                             content={publishedAt.split("T")[0]}
                         />
                         <AnimatedComponent
-                            TypeComponentToDisplay={motion.h1}
+                            FramerComponentToDisplay={motion.h1}
                             baseClassNames={baseDescriptionStyle}
                             animationTime={animationTime}
                             variant={descriptionVariant}
                             dependency={article}
+                            styles={styles}
                             content={
                                 isValid(description)
                                     ? `${description.substring(
@@ -158,8 +165,9 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             }
                         />
                         <AnimatedComponent
-                            TypeComponentToDisplay={motion.h1}
+                            FramerComponentToDisplay={motion.h1}
                             baseClassNames={baseLinkStyle}
+                            styles={styles}
                             variant={linkVariant}
                             animationTime={animationTime}
                             dependency={article}

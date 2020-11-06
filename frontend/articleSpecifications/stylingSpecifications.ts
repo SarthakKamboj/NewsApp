@@ -1,3 +1,6 @@
+// These specify the different styles keys I use in
+// ArticleToShow.tsx (the component that renders the full information about the article)
+
 import styles from "../styles/articleToShow.module.scss";
 
 export const baseNameStyle: { readonly [key: string]: boolean } = {
