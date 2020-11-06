@@ -8,14 +8,11 @@ $newsSummariesSectionWidth: 400px;
 
 .container {
     display: grid;
-    grid-template-rows: /*$newsSummariesTitleHeight*/ $newsSummariesTopicsHeight 1fr $newsPaginationHeight;
-    // width: $newsSummariesSectionWidth;
+    grid-template-rows: $newsSummariesTopicsHeight 1fr $newsPaginationHeight;
     width: 100%;
     padding: 0 1rem;
     background: $black;
     grid-template-areas:
-        // "title"
-
         "topics"
         "articles"
         "paginationSection";
@@ -61,8 +58,6 @@ $newsSummariesSectionWidth: 400px;
             padding: 0.5rem 0.75rem;
             font-size: 1.25rem;
             $li-horizontal-margin: 0.5rem;
-            // height: 3rem;
-            // width: 8rem;
             transition: all 0.2s;
             cursor: pointer;
 
@@ -91,6 +86,11 @@ $newsSummariesSectionWidth: 400px;
         row-gap: 0.5rem;
         position: relative;
         overflow-y: hidden;
+
+        .noArticles {
+            text-align: center;
+            width: 100%;
+        }
 
         .loader {
             border: 16px solid $white;

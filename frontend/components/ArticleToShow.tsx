@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     ARTICLE_RESPONSE_TYPE,
@@ -6,257 +6,37 @@ import {
 } from "../types/apiReponseTypes";
 import styles from "../styles/articleToShow.module.scss";
 import Link from "next/link";
-import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import { motion, AnimateSharedLayout } from "framer-motion";
 import classnames from "classnames";
-import { genericAnimationType } from "../types/genericAnimationType";
 import AnimatedComponent from "./AnimatedComponent";
+import {
+    authorVariant,
+    dateVariant,
+    descriptionVariant,
+    linkVariant,
+    baseNameVariant,
+    noArticleSelectedVariant,
+    thumbnailVariant,
+    titleVariant,
+    animationTime,
+} from "../articleSpecifications/animationSpecifications";
+import {
+    baseNoArticleSelectedStyle,
+    baseAuthorStyle,
+    baseDateStyle,
+    baseDescriptionStyle,
+    baseLinkStyle,
+    baseNameStyle,
+    baseThumbnailStyle,
+    baseTitleStyle,
+} from "../articleSpecifications/stylingSpecifications";
 
 type ArticleToShowType = {
     article?: ARTICLE_RESPONSE_TYPE;
     sourcesInfo?: SOURCES_RESPONSE_TYPE[];
 };
 
-const animationTime = 0.6;
-
-const titleYChange = 500;
-const titleVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        y: titleYChange,
-    },
-    animate: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: animationTime,
-        },
-    },
-    exit: {
-        opacity: 0,
-        y: titleYChange,
-        transition: {
-            duration: animationTime,
-        },
-    },
-};
-
-const waterMarkVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        scale: 2,
-    },
-    animate: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-            duration: animationTime,
-        },
-    },
-    exit: {
-        opacity: 0,
-        // x: -100,
-        scale: 2,
-        transition: {
-            duration: animationTime,
-        },
-    },
-};
-
-const authorChangeX = -120;
-const authorVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        x: authorChangeX,
-    },
-    animate: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: animationTime,
-        },
-    },
-    exit: {
-        opacity: 0,
-        x: authorChangeX,
-        transition: {
-            duration: animationTime,
-        },
-    },
-};
-
-const nameChangeY = -120;
-const baseNameVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        y: nameChangeY,
-        transition: {
-            duration: animationTime,
-        },
-    },
-    animate: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-    exit: {
-        opacity: 0,
-        y: nameChangeY,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-};
-
 const maxDescriptionCharacters = 100;
-const descriptionYChange = -200;
-const descriptionVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        y: descriptionYChange,
-    },
-    animate: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-    exit: {
-        opacity: 0,
-        y: descriptionYChange,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-};
-
-const thumbnailChangeX = 1500;
-const thumbnailVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        x: thumbnailChangeX,
-    },
-    animate: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: animationTime,
-        },
-    },
-    exit: {
-        x: thumbnailChangeX,
-        transition: {
-            duration: animationTime,
-        },
-    },
-};
-
-const linkVariant: genericAnimationType = {
-    initial: {
-        scale: 0,
-    },
-    animate: {
-        scale: 1,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-    exit: {
-        scale: 0,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-};
-
-const dateChangeX = -120;
-const dateVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        x: dateChangeX,
-    },
-    animate: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: animationTime,
-        },
-    },
-    exit: {
-        opacity: 0,
-        x: dateChangeX,
-        transition: {
-            duration: animationTime,
-        },
-    },
-};
-
-const noArticleSelectedVariant: genericAnimationType = {
-    initial: {
-        opacity: 0,
-        scale: 0,
-    },
-    animate: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-    exit: {
-        opacity: 0,
-        scale: 0,
-        transition: {
-            duration: animationTime,
-            type: "tween",
-        },
-    },
-};
-
-const baseWaterMarkStyles: { readonly [key: string]: boolean } = {
-    [styles.waterMarkName]: true,
-};
-
-const baseNameStyle: { readonly [key: string]: boolean } = {
-    [styles.name]: true,
-};
-
-const baseAuthorStyle: { readonly [key: string]: boolean } = {
-    [styles.author]: true,
-};
-
-const baseDescriptionStyle: { readonly [key: string]: boolean } = {
-    [styles.description]: true,
-};
-
-const baseThumbnailStyle: { readonly [key: string]: boolean } = {
-    [styles.thumbnail]: true,
-};
-
-const baseLinkStyle: { readonly [key: string]: boolean } = {
-    [styles.link]: true,
-};
-
-const baseDateStyle: { readonly [key: string]: boolean } = {
-    [styles.date]: true,
-};
-
-const baseTitleStyle: { readonly [key: string]: boolean } = {
-    [styles.title]: true,
-};
-
-const baseNoArticleSelectedStyle: { readonly [key: string]: boolean } = {
-    [styles.noArticleSelected]: true,
-};
 
 const isValid = (s: string) => s !== undefined && s !== null && s !== "";
 
@@ -325,14 +105,6 @@ const ArticleToShow: React.FC<ArticleToShowType> = React.memo(
                             content={<p className={styles.name}>{name}</p>}
                         />
 
-                        {/* <AnimatedComponent
-                            TypeComponentToDisplay={motion.h1}
-                            variant={waterMarkVariant}
-                            animationTime={animationTime}
-                            content={name}
-                            dependency={article}
-                            baseClassNames={baseWaterMarkStyles}
-                        /> */}
                         <AnimatedComponent
                             TypeComponentToDisplay={motion.h1}
                             variant={titleVariant}

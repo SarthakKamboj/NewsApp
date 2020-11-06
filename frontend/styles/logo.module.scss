@@ -7,13 +7,8 @@ $dateSectionTitle: 150px;
 .container {
     width: $datesSectionWidth;
     height: 100%;
-    // display: grid;
-    // grid-template-rows: $dateSectionTitle 1fr;
     @include flexCenter;
     background-color: $black;
-    // grid-template-areas:
-    //     "logo"
-    //     "dates";
 
     .logo {
         grid-area: logo;
@@ -25,45 +20,4 @@ $dateSectionTitle: 150px;
             width: 80px;
         }
     }
-
-    // .dates {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: space-around;
-    //     align-items: center;
-    //     transition: all 0.5s;
-
-    //     .day {
-    //         width: 100%;
-    //         height: 100%;
-    //         font-size: 1.25rem;
-    //         color: $primary;
-    //         font-weight: bold;
-    //         transition: all 0.5s;
-    //         cursor: pointer;
-    //         @include flexCenter;
-    //         position: relative;
-
-    //         &:after {
-    //             content: "";
-    //             transition: all 0.2s;
-    //             position: absolute;
-    //             top: 50%;
-    //             bottom: 50%;
-    //             transform: translateY(-50%);
-    //             right: 0;
-    //             bottom: 25%;
-    //             background: $primary;
-    //             height: 0;
-    //             width: 0.2rem;
-    //             opacity: 0.5;
-    //         }
-
-    //         &:hover {
-    //             &:after {
-    //                 height: 2rem;
-    //             }
-    //         }
-    //     }
-    // }
 }

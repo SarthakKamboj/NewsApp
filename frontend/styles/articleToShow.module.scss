@@ -17,16 +17,11 @@
     z-index: 2;
 
     .animationContainer {
-        // overflow: hidden;
         .p {
             width: 100%;
             height: 100%;
         }
     }
-
-    // * {
-    //     overflow: hidden;
-    // }
 
     .thumbnail {
         pointer-events: none;
@@ -85,17 +80,12 @@
         row-gap: 0.5rem;
         width: 100%;
         height: 100%;
-        // z-index: 2;
-        // * {
-        //     z-index: 2;
-        // }
         position: relative;
 
         .preText {
             font-size: 0.7rem;
             color: $white;
             max-width: 4.5rem;
-
             overflow: hidden;
         }
 
@@ -114,7 +104,6 @@
 
         .title {
             color: $white;
-
             overflow: hidden;
             font-weight: bold;
             font-size: 1.2rem;
@@ -143,7 +132,6 @@
         .date {
             font-size: 0.6rem;
             grid-area: date;
-
             overflow: hidden;
             display: flex;
         }
@@ -159,7 +147,6 @@
             text-decoration: none;
             grid-area: link;
             transition: all 0.2s;
-            // font-size: 1.25rem;
             font-size: 0.5rem;
             font-weight: bold;
             transform-origin: 0 0;
@@ -170,7 +157,6 @@
             a {
                 color: $black;
                 height: 2.8rem;
-                // width: 10rem;
                 @include flexCenter;
                 transition: $transition;
                 text-decoration: none;

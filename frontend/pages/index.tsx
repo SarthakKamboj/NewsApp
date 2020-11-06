@@ -13,7 +13,6 @@ import Head from "next/head";
 type HomePageType = {};
 
 const HomePage: React.FC<HomePageType> = () => {
-    // home page
     const [articleToShow, setArticleToShow] = useState<
         ARTICLE_RESPONSE_TYPE | undefined
     >(undefined);
@@ -21,12 +20,10 @@ const HomePage: React.FC<HomePageType> = () => {
     const [sourcesInfo, setSourcesInfo] = useState<SOURCES_RESPONSE_TYPE[]>([]);
 
     const [query, setQuery] = useState<string>("");
-    const [date, setDate] = useState<Date | undefined>(undefined);
     const memArticleToShow = useMemo(() => articleToShow, [articleToShow]);
 
     useEffect(() => {
         const fetchSources = async () => {
-            // const key = process.env.NEXT_PUBLIC_API_KEY;
             const res = await fetch(
                 `https://newsapi.org/v2/sources?apiKey=${process.env.NEXT_PUBLIC_BUSINESS_API_KEY}`
             );
@@ -58,7 +55,6 @@ const HomePage: React.FC<HomePageType> = () => {
             </span>
             <span className={styles.newsSummaries}>
                 <NewsSummaries
-                    date={date}
                     setArticleToShow={setArticleToShow}
                     query={query}
                     setQuery={setQuery}

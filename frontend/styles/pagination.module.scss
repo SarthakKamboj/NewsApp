@@ -3,14 +3,12 @@
 
 .container {
     display: flex;
-    // justify-content: space-around;
     justify-content: center;
     font-size: 1.5rem;
     padding: 0 3rem;
 
     li {
         @include flexCenter;
-        // border: 2px solid $primary;
         width: 3rem;
         height: 3rem;
         margin: 0 0.5rem;
@@ -19,7 +17,6 @@
         position: relative;
 
         &:after {
-            // content: "sdkn";
             content: "";
             position: absolute;
             bottom: 0;
@@ -33,18 +30,12 @@
         }
 
         &:hover {
-            // background: $primary;
-            // color: $white;
-
             &:after {
                 width: 1rem;
             }
         }
     }
     .selectedPaginationGroup {
-        // background: $primary;
-        // color: $white;
-
         &:after {
             width: 1rem;
         }

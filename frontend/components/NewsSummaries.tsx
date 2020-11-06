@@ -10,7 +10,6 @@ type NewsSummariesType = {
     setArticleToShow: React.Dispatch<
         React.SetStateAction<ARTICLE_RESPONSE_TYPE>
     >;
-    date?: Date | undefined;
     query: string;
     setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -18,7 +17,7 @@ type NewsSummariesType = {
 type topicsType = "sports" | "entertainment" | "technology";
 
 const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
-    ({ setArticleToShow, date, query }) => {
+    ({ setArticleToShow, query }) => {
         const [articles, setArticles] = useState<
             ARTICLE_RESPONSE_TYPE[] | null
         >([]);
@@ -45,11 +44,8 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                     let dateString;
                     const queryParams = query !== "" ? `&q=${query}` : "";
 
-                    if (!date) {
-                        dateString = convertDateToString(new Date());
-                    } else {
-                        dateString = convertDateToString(date);
-                    }
+                    dateString = convertDateToString(new Date());
+
                     baseUrl = "https://newsapi.org/v2/top-headlines?";
                     queryUrl = `category=${topic}&country=us${queryParams}&from=${dateString}&to=${dateString}&`;
                     const apiKey = `apiKey=${process.env.NEXT_PUBLIC_BUSINESS_API_KEY}`;
@@ -79,7 +75,7 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
             setLoading(true);
             setAllArticles([]);
             requestAndUpdate();
-        }, [date, topic, query]);
+        }, [topic, query]);
 
         useEffect(() => {
             const paginateAllArticles = async () => {
@@ -101,7 +97,6 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
 
         return (
             <div className={styles.container}>
-                {/* <h1 className={styles.title}>Recent News</h1> */}
                 <ul className={styles.topics}>
                     <li
                         onClick={() => changeTopic("sports")}
@@ -130,14 +125,11 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                 </ul>
                 <div className={styles.articles}>
                     <div className={classnames({ [styles.loader]: loading })} />
-                    {articles !== []
+                    {articles.length !== 0
                         ? articles.map((article, index) => {
                               return (
                                   <NewsSummary
-                                      lastArticleOnPagination={
-                                          //   (index + 1) % 3 !== 0
-                                          false
-                                      }
+                                      lastArticleOnPagination={false}
                                       height={newsSummaryHeight}
                                       onClick={() => {
                                           setArticleToShow(article);
@@ -147,7 +139,11 @@ const NewsSummaries: React.FC<NewsSummariesType> = React.memo(
                                   />
                               );
                           })
-                        : "no articles"}
+                        : !loading && (
+                              <h4 className={styles.noArticles}>
+                                  No Articles Found
+                              </h4>
+                          )}
                 </div>
                 <div className={styles.paginationSection}>
                     <Pagination

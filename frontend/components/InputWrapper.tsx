@@ -12,7 +12,7 @@ const InputWrapper: React.FC<InputWrapperType> = ({ setQuery }) => {
     const [inputVal, setInputVal] = useState<string>("");
     const searchOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        setQuery(inputVal.replace(" ", "-"));
+        setQuery(inputVal);
     };
     const clearClick = () => {
         setInputVal("");

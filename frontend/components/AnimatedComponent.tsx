@@ -1,8 +1,6 @@
 import classnames from "classnames";
 import { genericAnimationType } from "../types/genericAnimationType";
 import {
-    motion,
-    AnimateSharedLayout,
     AnimatePresence,
     ForwardRefComponent,
     HTMLMotionProps,
