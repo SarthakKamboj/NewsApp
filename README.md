@@ -21,14 +21,16 @@ For this application, I focused on ensuring I take advantage of the modularity t
 <h4>Challenge 2: Delaying animations for previous exit animations to finish
 <p>
     When I was implementing animations, I chose to use the Framer Motion API since its components were very similar to their JSX counterparts. For example, in JSX I could write
-    ```html
-    <div></div>
-    ```
+    
+```html
+<div></div>
+```
 
     While in Framer Motion, I could animate this div by writing
-    ```html
-    <motion.div></motion.div>
-    ```
+
+```html
+<motion.div></motion.div>
+```
 
 </p>
 
