@@ -1,5 +1,5 @@
 <h1>News Web Application</h1>
-This is a news application I developed for the Capital One Summit. It servers as an easy and reliable way to access information about current events about sports, entertainment, and technology. It utilize the NewsAPI to consume articles and uses the NextJs framework. This application was deployed through Vercel and its link is [a link](https://news-app-navy.vercel.app/).
+This is a news application I developed for the Capital One Summit. It servers as an easy and reliable way to access information about current events about sports, entertainment, and technology. It utilize the NewsAPI to consume articles and uses the NextJs framework. This application was deployed through Vercel and its link is https://news-app-navy.vercel.app/.
 
 <h2>Challenges/Solutions</h2>
 <p>
