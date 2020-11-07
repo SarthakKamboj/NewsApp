@@ -12,12 +12,16 @@ For this application, I focused on ensuring I take advantage of the modularity t
 </p>
 
 <p>
-    Initially I developed this component to request an external component to render and various animation properties. However, because I abstracted the animation logic into a separate component, I was able to easily add additional functionality I had not originally planned on developing.
+    Initially I developed this component (called AnimatedComponent) to request an external component to render along with various animation properties. However, because I abstracted the animation logic into a separate component, I was able to easily add additional functionality I had not originally planned on developing.
 </p>
 
 <p>
-    One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in,I was able to create animations without breaking previous designs.
+    One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in, I was able to create animations without breaking previous designs.
 </p>
+
+```tree
+
+```
 
 <h4>Challenge 2: Delaying animations for previous exit animations to finish</h4>
 <p>
@@ -52,7 +56,20 @@ renderComponent && <motion.div>Animated Content</motion.div>;
     Although not the largest solution, this solution required me to use the most amount of thought because I had to combine the functionality of a native window with JSX logic. This ended up being extremely effective due to the asynchronous nature of setTimeout allowing for other Javascript to be run while it is waiting.
 </p>
 
-<h4>Challenge 3: Loading default images if API did not provide its own images</h4>
+<h4>Challenge 3: Reducing Load Time</h4>
+<p>
+    The design of my web application allows me to separate the content for entertainment, technology, and sports. Therefore, this allowed me to implement a version of lazy loading that improved the load time of the website.
+</p>
+
+<p>
+    Instead of making 3 API calls for entertainment articles, technology articles, and sports articles, I only make one API call depending on the category the user is viewing. For example, if he or she is viewing the sports category, then the application makes a request to only the sports category endpoint. If he or she clicks on the entertainment option, then the application sends a request to only the entertainment endpoint.
+</p>
+
+<p>
+    Overall, this reduces how long the user has to wait for the content to render and speeds the web application.
+</p>
+
+<h4>Challenge 4: Loading default images if API did not provide its own images</h4>
 <p>
     When animated article images as backgrounds, I realized some articles did not provide an image in the first place. However, this could mean the image was null, undefined, or simply an empty string. 
 </p>
