@@ -1,14 +1,46 @@
 <h1>News Web Application</h1>
 This is a news application I developed for the Capital One Summit. It servers as an easy and reliable way to access information about current events about sports, entertainment, and technology.
 
-<h2>Development Challenges/Solutions</h2>
+<h2>Challenges/Solutions</h2>
 For this application, I focused on ensuring I take advantage of the modularity that comes with React Components and apply them whenever necessary. Some notable use cases I found were wrapping the JSX elements I wanted to animate into higher-level components and creating re-usable components to list the articles received from the API. <br /><br />
 
-In the first situation, I knew I wanted to animate the primary article I display with initial and exit animations. However, I quickly found myself wrapping each element in its own container and creating a boolean state values associate with said element. Understanding this is not the optimal solution, I decided to create a component that handled this logic. By abstracting the animation logic into a separate component, I was able to easily add additional functionality such as style inheritance and event-based triggers. Moreover, when I used this component in my ArticleToShow component, it allowed for better code-readility and less state variables to handle for. <br />
+<h4>Challenge 1: Animating elements once the user clicked on Read More</h4>
+<p>
+    When I started developing the primary article view component, I knew I wanted to animate the information in and out with initial and exit animations. However, I quickly found myself wrapping each element that I wanted to animate in its own container and creating several boolean state values to control said animations. Understanding this is not the optimal solution, I decided to create a component that handled this logic.
+</p>
 
-Moreover, as the development went on, I realized the number of animation variables I was created in my ArticleToShow component was becoming too much. Therefore, I decided to place these specifications in a separate file and export them instead. This change decreased the number of lines of the component drastically while maintaining all the animations. <br />
+<p>
+    Initially I developed this component to request an external component to render and various animation properties. However, because I abstracted the animation logic into a separate component, I was able to easily add additional functionality I had not originally planned on developing.
+</p>
 
-In the second situation, I created a NewSummary component that displayed information about a specific article in a condensed form. Abstracting this process into its own component enabled me to add one crucial feature: pagination. Since the logic for rendering individual article summaries and rendering groups of articles were separate, I easily able to manipulate how many news articles I could show on the side pane. <br /><br />
+<p>
+    One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in,I was able to create animations without breaking previous designs.
+
+</p>
+
+<h4>Challenge 2: Delaying animations for previous exit animations to finish
+<p>
+    When I was implementing animations, I chose to use the Framer Motion API since its components were very similar to their JSX counterparts. For example, in JSX I could write
+    ```html
+    <div></div>
+    ```
+
+    While in Framer Motion, I could animate this div by writing
+    ```html
+    <motion.div></motion.div>
+    ```
+
+</p>
+
+<h4>Challenge 3: Loading default images if API did not provide its own images</h4>
+<p>
+    When animated article images as backgrounds, I realized some articles did not provide an image in the first place. However, this could mean the image was null, undefined, or simply an empty string. 
+</p>
+    
+<p>
+    Therefore, to handle for this, I downloaded an image locally and created a function check the validity of an image url. This allowed me to avoid having no background and instead render an image that can load faster than its article counterparts.
+    Therefore, to handle for this, I downloaded an image locally and created a function check the validity of an image url. This allowed me to avoid having no background and instead render an image that can load faster than its article counterparts.
+</p>
 
 <h2>Other Development Choices</h2>
 
