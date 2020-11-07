@@ -76,11 +76,13 @@ renderComponent && <motion.div>Animated Content</motion.div>;
 
 <h2>Other Development Choices</h2>
 
-For the animations themselves, I chose to use Framer Motion particularly because it allowed for straight-forward enter and exit animations while also providing components that were easily replaceable with their JSX counterparts. This decision enabled me to initally write code without animating any elements and then be able to animate them efficiently. <br />
+<p>
+To style the components, I used Sass modules for three reasons: enhanced styling capabilities due to variables, nesting, and the inherent local-scope. Declaring variables in Sass allowed me to use tehse variables globally in any Sass files. I primarily used this functionality to store colors and transition information. Therefore, this allowed me to easily test different color schemes to see what fit best with my application as I simply had to change the values in my global Sass file.
+</p>
 
-To style the components, I used Sass modules for two reasons: enhanced styling capabilities due to variables and nesting and their local-scope. Declaring variables in Sass allowed me to declare variables globally that could be used anywhere in my Sass files. I primarily used this functionality to store colors and transition information. Moreover, this allowed me to easily test different color schemes to see what fit best with my application as I simply had to change the values in the variables Sass file. <br />
-
-Lastly, I decided to use Typescript for this application since it allowed for enhanced code readability and strong type checking. in both situations, the results included faster and more effective development as Typescript informed me of whatever properties I need to pass into components while also specifying what purpose a specific component or function may have had. <br />
+<p>
+Lastly, I decided to use Typescript for this application since it allowed for enhanced code readability and strong type checking. in both situations, the results included faster and more effective development as Typescript informed me of whatever properties I need to pass into components while also specifying what purpose a specific component or function may have had.
+</p>
 
 <h3>Developer: Sarthak Kamboj</h3>
 <h4>Built With</h4>
@@ -88,7 +90,7 @@ Lastly, I decided to use Typescript for this application since it allowed for en
     <li>Frontend Framework: NextJs</li>
     <li>Animations: Framer Motion</li>
     <li>Styling: Sass Modules</li>
-    <li>Coding: TypeScript</li>
+    <li>Programming Language: TypeScript</li>
 </ul>
 
 <h4>Installation</h4>
