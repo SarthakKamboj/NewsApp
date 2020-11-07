@@ -19,7 +19,7 @@ For this application, I focused on ensuring I take advantage of the modularity t
     One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in, I was able to create animations without breaking previous designs.
 </p>
 
-```tree
+```bash
 
 ```
 
