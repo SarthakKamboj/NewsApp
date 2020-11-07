@@ -33,7 +33,7 @@ For this application, I focused on ensuring I take advantage of the modularity t
 </p>
 
 ```tsx
-const [renderComponent, setRenderComponent] = useState(true);
+const [renderComponent, setRenderComponent] = useState<boolean>(true);
 ```
 
 ```jsx
