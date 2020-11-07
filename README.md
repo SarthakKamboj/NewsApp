@@ -92,10 +92,3 @@ Lastly, I decided to use Typescript for this application since it allowed for en
     <li>Styling: Sass Modules</li>
     <li>Programming Language: TypeScript</li>
 </ul>
-
-<h4>Installation</h4>
-<ol>
-    <li>Move into the frontend directory</li>
-    <li>Run "npm i"</li>
-    <li>Run "npm run dev"</li>
-</ol>
