@@ -19,10 +19,6 @@ For this application, I focused on ensuring I take advantage of the modularity t
     One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in, I was able to create animations without breaking previous designs.
 </p>
 
-```bash
-
-```
-
 <h4>Challenge 2: Delaying animations for previous exit animations to finish</h4>
 <p>
     When I was implementing animations, I chose to use the Framer Motion API since its components were very similar to their JSX counterparts. For example, in JSX I could write
@@ -66,7 +62,7 @@ renderComponent && <motion.div>Animated Content</motion.div>;
 </p>
 
 <p>
-    Overall, this reduces how long the user has to wait for the content to render and speeds the web application.
+    Overall, this reduces how long the user has to wait for the content to render and speeds up the web application.
 </p>
 
 <h4>Challenge 4: Loading default images if API did not provide its own images</h4>
