@@ -15,23 +15,39 @@ For this application, I focused on ensuring I take advantage of the modularity t
 
 <p>
     One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in,I was able to create animations without breaking previous designs.
-
 </p>
 
 <h4>Challenge 2: Delaying animations for previous exit animations to finish
 <p>
     When I was implementing animations, I chose to use the Framer Motion API since its components were very similar to their JSX counterparts. For example, in JSX I could write
+</p>
     
 ```html
-<div></div>
+<div>Content</div>
 ```
 
+<p>
     While in Framer Motion, I could animate this div by writing
+</p>
 
-```html
-<motion.div></motion.div>
+```typescript
+const renderComponent = true;
 ```
 
+```jsx
+renderComponent && <motion.div>Animated Content</motion.div>;
+```
+
+<p>
+    However, in order to control the animations, I needed to toggle boolean values determining whether the component can be seen using React Hook useState functions. However, the issue was as soon a I toggle a boolean value to false, it would become true also instantenously in order to load the new content. This force Framer Motion to completely skip the exit animations.
+</p>
+
+<p>
+    The solution I came up was to use the setTimeout function to call a function after a fixed number of milliseconds that toggled this boolean on whenever I toggled it off. Therefore, everytime the component was taken out of the virtual DOM, the delay gave Framer Motion enough time to animate it out. Then, after a few moments, the component would once again be animated in with the new article information.
+</p>
+
+<p>
+    Although not the largest solution, this solution required me to use the most amount of thought. Up to this point, I had not combined the functionality of a native window with JSX. But this process ended up being extremely effective due to the asynchronous nature of setTimeout allowing for other Javascript to be run while it is waiting.
 </p>
 
 <h4>Challenge 3: Loading default images if API did not provide its own images</h4>
