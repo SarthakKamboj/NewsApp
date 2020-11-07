@@ -41,15 +41,15 @@ renderComponent && <motion.div>Animated Content</motion.div>;
 ```
 
 <p>
-    However, in order to control the animations, I needed to toggle boolean values determining whether the component can be seen using React Hook useState functions. However, the issue was as soon a I toggle a boolean value to false, it would become true also instantenously in order to load the new content. This force Framer Motion to completely skip the exit animations.
+    However, in order to control the animations, I needed to toggle boolean values determining whether the component can be seen using React Hook useState functions. However, the issue was as soon a I toggle a boolean value to false, it would become true also instantenously in order to load the new content. This would force Framer Motion to abruptly end and completely skip the exit animations.
 </p>
 
 <p>
-    The solution I came up was to use the setTimeout function to call a function after a fixed number of milliseconds that toggled this boolean on whenever I toggled it off. Therefore, everytime the component was taken out of the virtual DOM, the delay gave Framer Motion enough time to animate it out. Then, after a few moments, the component would once again be animated in with the new article information.
+    The solution I came up was to use the setTimeout function to call a function after a fixed number of milliseconds that toggled this boolean on whenever I toggled it off. This in turn automatically scheduled a delayed the process of re-rendeing by a couple millisseconds. Therefore, everytime the component was taken out of the virtual DOM, the delay gave Framer Motion enough time to animate it out. Then, after a few moments, the component would once again re-enter the virtual DOM and be animated in with the new article information.
 </p>
 
 <p>
-    Although not the largest solution, this solution required me to use the most amount of thought. Up to this point, I had not combined the functionality of a native window with JSX. But this process ended up being extremely effective due to the asynchronous nature of setTimeout allowing for other Javascript to be run while it is waiting.
+    Although not the largest solution, this solution required me to use the most amount of thought because I had to combine the functionality of a native window with JSX logic. This ended up being extremely effective due to the asynchronous nature of setTimeout allowing for other Javascript to be run while it is waiting.
 </p>
 
 <h4>Challenge 3: Loading default images if API did not provide its own images</h4>
@@ -58,7 +58,6 @@ renderComponent && <motion.div>Animated Content</motion.div>;
 </p>
     
 <p>
-    Therefore, to handle for this, I downloaded an image locally and created a function check the validity of an image url. This allowed me to avoid having no background and instead render an image that can load faster than its article counterparts.
     Therefore, to handle for this, I downloaded an image locally and created a function check the validity of an image url. This allowed me to avoid having no background and instead render an image that can load faster than its article counterparts.
 </p>
 
