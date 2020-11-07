@@ -2,7 +2,9 @@
 This is a news application I developed for the Capital One Summit. It servers as an easy and reliable way to access information about current events about sports, entertainment, and technology.
 
 <h2>Challenges/Solutions</h2>
-For this application, I focused on ensuring I take advantage of the modularity that comes with React Components and apply them whenever necessary. Some notable use cases I found were wrapping the JSX elements I wanted to animate into higher-level components and creating re-usable components to list the articles received from the API. <br /><br />
+<p>
+For this application, I focused on ensuring I take advantage of the modularity that comes with React Components and apply them whenever necessary. Some notable use cases I found were wrapping the JSX elements I wanted to animate into higher-level components and creating re-usable components to list the articles received from the API. 
+</p>
 
 <h4>Challenge 1: Animating elements once the user clicked on Read More</h4>
 <p>
@@ -17,7 +19,7 @@ For this application, I focused on ensuring I take advantage of the modularity t
     One such feature I implemented was style inheritance. I requested a styles object that is shipped with modular Sass files and an object that specifies key-value pairs for specific Sass classes. Then by using this properties to style the component that was passed in,I was able to create animations without breaking previous designs.
 </p>
 
-<h4>Challenge 2: Delaying animations for previous exit animations to finish
+<h4>Challenge 2: Delaying animations for previous exit animations to finish</h4>
 <p>
     When I was implementing animations, I chose to use the Framer Motion API since its components were very similar to their JSX counterparts. For example, in JSX I could write
 </p>
@@ -30,8 +32,8 @@ For this application, I focused on ensuring I take advantage of the modularity t
     While in Framer Motion, I could animate this div by writing
 </p>
 
-```typescript
-const renderComponent = true;
+```tsx
+const [renderComponent, setRenderComponent] = useState(true);
 ```
 
 ```jsx
